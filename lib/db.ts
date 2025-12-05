@@ -5,7 +5,7 @@ import { Product, ProductFilter, PriceStats, ProviderStats } from '@/types';
 const dbPath = path.join(process.cwd(), 'products.db');
 const db = new Database(dbPath);
 
-// Inicializar la base de datos
+// Inicializa la base de datos SQLite
 export function initDB() {
   db.exec(`
     CREATE TABLE IF NOT EXISTS products (
@@ -39,8 +39,12 @@ export function initDB() {
   `);
 }
 
-// Insertar productos desde importación
-export function insertProducts(products: Omit<Product, 'id'>[]) {
+// Insertar productos (opcionalmente limpiar antes)
+export function insertProducts(products: Omit<Product, 'id'>[], clearBefore = false) {
+  if (clearBefore) {
+    clearAllProducts();
+  }
+
   const stmt = db.prepare(`
     INSERT INTO products (
       url, nombre, precio, descuento, categoria, proveedor,
@@ -48,8 +52,8 @@ export function insertProducts(products: Omit<Product, 'id'>[]) {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
-  const insertMany = db.transaction((products) => {
-    for (const product of products) {
+  const insertMany = db.transaction((items) => {
+    for (const product of items as Omit<Product, 'id'>[]) {
       stmt.run(
         product.url,
         product.nombre,
@@ -65,6 +69,7 @@ export function insertProducts(products: Omit<Product, 'id'>[]) {
   });
 
   insertMany(products);
+  return products.length;
 }
 
 // Obtener productos con filtros
@@ -109,7 +114,7 @@ export function getProducts(filters: ProductFilter = {}, limit = 100, offset = 0
 }
 
 // Contar productos con filtros
-export function countProducts(filters: ProductFilter = {}): number {
+export function getProductCount(filters: ProductFilter = {}): number {
   let query = 'SELECT COUNT(*) as count FROM products WHERE 1=1';
   const params: (string | number)[] = [];
 
@@ -147,18 +152,16 @@ export function countProducts(filters: ProductFilter = {}): number {
   return result.count;
 }
 
-// Obtener lista de proveedores únicos
 export function getProviders(): string[] {
   const stmt = db.prepare('SELECT DISTINCT proveedor FROM products WHERE proveedor IS NOT NULL ORDER BY proveedor');
   const results = stmt.all() as { proveedor: string }[];
-  return results.map(r => r.proveedor);
+  return results.map((r) => r.proveedor);
 }
 
-// Obtener lista de categorías únicas
 export function getCategories(): string[] {
   const stmt = db.prepare('SELECT DISTINCT categoria FROM products WHERE categoria IS NOT NULL ORDER BY categoria');
   const results = stmt.all() as { categoria: string }[];
-  return results.map(r => r.categoria);
+  return results.map((r) => r.categoria);
 }
 
 // Análisis de precios por producto
@@ -222,12 +225,10 @@ export function getProviderStats(): ProviderStats[] {
   return stmt.all() as ProviderStats[];
 }
 
-// Limpiar todos los productos
 export function clearAllProducts() {
   db.prepare('DELETE FROM products').run();
 }
 
-// Inicializar al importar
 initDB();
 
 export default db;

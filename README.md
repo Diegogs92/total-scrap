@@ -196,10 +196,17 @@ vercel login
 3. Importar el repositorio
 4. Vercel detectará automáticamente Next.js
 
-### 3. Configurar variables de entorno (opcional)
+### 3. Configurar Firebase (persistencia en Vercel)
 
-Si necesitas configurar variables, agregar en Vercel Dashboard:
-- Settings → Environment Variables
+1. Crea una cuenta de servicio en Firebase con acceso a Firestore.
+2. En Vercel ve a **Settings → Environment Variables** y agrega:
+   - `FIREBASE_PROJECT_ID`
+   - `FIREBASE_CLIENT_EMAIL`
+   - `FIREBASE_PRIVATE_KEY` (usa `\n` en los saltos de línea)
+   - Opcional: `FIREBASE_SERVICE_ACCOUNT` con el JSON completo.
+3. Con esas variables, el backend usa Firestore automáticamente en Vercel. En local sigue usando SQLite.
+
+> Sin Firebase los datos se pierden en Vercel porque SQLite es efímero en cada deploy.
 
 ### 4. Deploy
 
@@ -210,14 +217,9 @@ vercel --prod
 
 ### Nota sobre la base de datos en Vercel
 
-**SQLite no persiste en Vercel** (sistema de archivos efímero). Para producción, considera:
-
-1. **Vercel Postgres** (recomendado)
-2. **Supabase**
-3. **PlanetScale**
-4. **MongoDB Atlas**
-
-Para migrar de SQLite a Postgres, modificar `lib/db.ts` usando `pg` o `@vercel/postgres`.
+- **Firestore (recomendado ahora)**: se activa al definir `FIREBASE_PROJECT_ID` y credenciales; persiste entre deploys.
+- **SQLite**: solo para desarrollo local (se borra en cada build en Vercel).
+- **Alternativas**: Vercel Postgres, Supabase, PlanetScale o MongoDB Atlas si prefieres SQL/NoSQL distinto.
 
 ## Filtros Disponibles
 

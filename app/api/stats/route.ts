@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPriceAnalysis, getProviderStats } from '@/lib/db';
+import { getPriceAnalysis, getProviderStats } from '@/lib/db-adapter';
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,12 +8,12 @@ export async function GET(request: NextRequest) {
 
     if (type === 'price-analysis') {
       const search = searchParams.get('search') || undefined;
-      const analysis = getPriceAnalysis(search);
+      const analysis = await getPriceAnalysis(search || undefined);
       return NextResponse.json({ analysis });
     }
 
     if (type === 'provider-stats') {
-      const stats = getProviderStats();
+      const stats = await getProviderStats();
       return NextResponse.json({ stats });
     }
 

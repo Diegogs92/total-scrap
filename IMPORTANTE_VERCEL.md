@@ -1,60 +1,25 @@
-# ⚠️ IMPORTANTE: Base de Datos en Vercel
+# IMPORTANTE: Base de datos en Vercel
 
-## El proyecto está configurado con SQLite para desarrollo local
+## SQLite solo para local
 
-**SQLite NO FUNCIONARÁ en Vercel** porque el filesystem es efímero (los datos se borran en cada deploy).
+SQLite funciona perfecto en desarrollo, pero **no persiste en Vercel** porque el filesystem es efímero.
 
-## Opciones para producción en Vercel:
+## Opción recomendada: Firebase (Firestore)
 
-### Opción 1: Vercel Postgres (Recomendado)
+1. Crea una cuenta de servicio en tu proyecto Firebase con acceso a Firestore.
+2. En Vercel agrega variables de entorno:
+   - `FIREBASE_PROJECT_ID`
+   - `FIREBASE_CLIENT_EMAIL`
+   - `FIREBASE_PRIVATE_KEY` (usa `\n` para los saltos de línea)
+   - Opcional: `FIREBASE_SERVICE_ACCOUNT` con el JSON completo.
+3. Redeploy. El backend usa Firestore automáticamente si encuentra `FIREBASE_PROJECT_ID`. En local seguirá usando SQLite sin cambios.
 
-1. **Crear base de datos en Vercel:**
-   - Ve a tu proyecto en [vercel.com](https://vercel.com)
-   - Storage → Create Database → Postgres
-   - Copia las variables de entorno automáticamente
+## Alternativa: Vercel Postgres u otros
 
-2. **Instalar dependencia:**
-```bash
-npm install @vercel/postgres
-```
+Si prefieres SQL:
+- Vercel Postgres (recomendado si ya usas el ecosistema Vercel)
+- Supabase
+- PlanetScale
+- MongoDB Atlas (NoSQL)
 
-3. **Modificar `lib/db.ts`:**
-```typescript
-import { sql } from '@vercel/postgres';
-
-export async function getProducts(filters: ProductFilter = {}) {
-  const { rows } = await sql`SELECT * FROM products WHERE ...`;
-  return rows;
-}
-
-// Repetir para todas las funciones
-```
-
-### Opción 2: Desplegar solo para prueba (datos temporales)
-
-Si solo quieres ver cómo se ve en producción y no te importa que los datos se pierdan:
-
-1. Deploy normalmente con `vercel --prod`
-2. Los datos se perderán en cada nuevo deploy
-3. Tendrás que re-importar después de cada deploy
-
-### Opción 3: Usar otro servicio de base de datos
-
-- **Supabase** (Postgres gratuito)
-- **PlanetScale** (MySQL serverless)
-- **MongoDB Atlas** (NoSQL)
-- **Railway** (Postgres/MySQL)
-
-## Estado actual del deploy
-
-El proyecto se puede desplegar a Vercel AHORA para ver el frontend, pero:
-- ✅ La interfaz funcionará perfectamente
-- ✅ Podrás importar datos vía API
-- ❌ Los datos se perderán en cada deploy
-- ❌ No hay persistencia entre reinicios
-
-## Recomendación
-
-**Para desarrollo/pruebas:** Usa local con SQLite (ya configurado)
-
-**Para producción:** Migra a Vercel Postgres siguiendo la Opción 1
+Para cambiar de motor, ajusta la capa `lib/db-*` según tu proveedor.

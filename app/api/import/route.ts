@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { insertProducts, clearAllProducts } from '@/lib/db';
+import { insertProducts } from '@/lib/db-adapter';
 
 interface ProductInput {
   url?: string;
@@ -33,12 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Limpiar base de datos si se solicita
-    if (clearBefore) {
-      clearAllProducts();
-    }
-
-    // Insertar productos
+    // Insertar productos (con limpieza opcional)
     const productsToInsert = products.map((p: ProductInput) => ({
       url: p.url || p.URL || '',
       nombre: p.nombre || p.Nombre || '',
@@ -51,12 +46,12 @@ export async function POST(request: NextRequest) {
       precioLista: p.precioLista ? parseFloat(String(p.precioLista)) : undefined,
     }));
 
-    insertProducts(productsToInsert);
+    const inserted = await insertProducts(productsToInsert, Boolean(clearBefore));
 
     return NextResponse.json({
       success: true,
-      imported: productsToInsert.length,
-      message: `${productsToInsert.length} productos importados exitosamente`,
+      imported: inserted,
+      message: `${inserted} productos importados exitosamente`,
     });
   } catch (error) {
     console.error('Error importing products:', error);

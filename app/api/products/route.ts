@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProducts, countProducts, getProviders, getCategories } from '@/lib/db';
-import { ProductFilter } from '@/types';
+import { getProducts, getProductCount, getProviders, getCategories } from '@/lib/db-adapter';
+import { ProductFilter } from '@/lib/db-adapter';
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,13 +9,13 @@ export async function GET(request: NextRequest) {
 
     // Obtener lista de proveedores
     if (action === 'providers') {
-      const providers = getProviders();
+      const providers = await getProviders();
       return NextResponse.json({ providers });
     }
 
     // Obtener lista de categorías
     if (action === 'categories') {
-      const categories = getCategories();
+      const categories = await getCategories();
       return NextResponse.json({ categories });
     }
 
@@ -26,15 +26,14 @@ export async function GET(request: NextRequest) {
       search: searchParams.get('search') || undefined,
       minPrice: searchParams.get('minPrice') ? parseFloat(searchParams.get('minPrice')!) : undefined,
       maxPrice: searchParams.get('maxPrice') ? parseFloat(searchParams.get('maxPrice')!) : undefined,
-      hasDiscount: searchParams.get('hasDiscount') === 'true',
     };
 
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '50');
     const offset = (page - 1) * limit;
 
-    const products = getProducts(filters, limit, offset);
-    const total = countProducts(filters);
+    const products = await getProducts(filters, limit, offset);
+    const total = await getProductCount(filters);
 
     return NextResponse.json({
       products,

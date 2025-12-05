@@ -9,14 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^15.0.0",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
     "better-sqlite3": "^11.0.0",
     "chart.js": "^4.4.0",
-    "react-chartjs-2": "^5.2.0",
     "date-fns": "^3.0.0",
-    "lucide-react": "^0.460.0"
+    "firebase": "^12.6.0",
+    "firebase-admin": "^13.6.0",
+    "lucide-react": "^0.460.0",
+    "next": "^15.0.0",
+    "react": "^18.3.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.8",
@@ -29,5 +31,9 @@
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
     "typescript": "^5"
+  },
+  "optionalDependencies": {
+    "@vercel/postgres": "^0.10.0",
+    "pg": "*"
   }
 }

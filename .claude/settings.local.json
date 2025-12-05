@@ -18,7 +18,8 @@
       "Bash(start c:UsersdiegoOneDriveDocumentosscrapper-bercogoogle-apps-script-projectCode.gs)",
       "Bash(cmd.exe /c start \"\" \"c:\\Users\\diego\\OneDrive\\Documentos\\scrapper-berco\\google-apps-script-project\\Code.gs\")",
       "Bash(cmd.exe /c start \"\" \"https://docs.google.com/spreadsheets/d/1CwkMP4lPQowSxc9TE0tnFAshRgSZ3Ht95Fk3O-4aQ6k/edit\")",
-      "Bash(cmd.exe /c start \"\" \"c:\\Users\\diego\\OneDrive\\Documentos\\scrapper-berco\\google-apps-script-project\\INSTALAR_AHORA.md\")"
+      "Bash(cmd.exe /c start \"\" \"c:\\Users\\diego\\OneDrive\\Documentos\\scrapper-berco\\google-apps-script-project\\INSTALAR_AHORA.md\")",
+      "Bash(cmd.exe /c start \"\" \"https://vercel.com/dgarciasantillan-7059s-projects/scrapper-berco/settings/deployment-protection\")"
     ],
     "deny": [],
     "ask": []

@@ -134,32 +134,19 @@ git push -u origin main
 4. **Framework Preset**: Next.js (detectado automáticamente)
 5. **Deploy**
 
-### Paso 3: Configurar Base de Datos en Producción
+### Paso 3: Configurar persistencia en Producción (Firebase)
 
-⚠️ **IMPORTANTE**: SQLite no funciona en Vercel (filesystem efímero).
+IMPORTANTE: SQLite no funciona en Vercel (filesystem efímero). Usa Firestore para que los datos persistan:
 
-#### Opción A: Vercel Postgres (Recomendado)
+1. Crea una cuenta de servicio en Firebase con acceso a Firestore.
+2. En Vercel ve a **Settings → Environment Variables** y agrega:
+   - FIREBASE_PROJECT_ID
+   - FIREBASE_CLIENT_EMAIL
+   - FIREBASE_PRIVATE_KEY (usa \n para los saltos de línea)
+   - Opcional: FIREBASE_SERVICE_ACCOUNT con el JSON completo.
+3. Despliega de nuevo en Vercel. El adaptador usa Firestore automáticamente si existe FIREBASE_PROJECT_ID. En local seguirás usando SQLite sin cambios.
 
-1. En el dashboard del proyecto → **Storage** → **Create Database**
-2. Seleccionar **Postgres**
-3. Copiar las credenciales
-4. Modificar `lib/db.ts` para usar Postgres:
-
-```typescript
-// Instalar: npm install @vercel/postgres
-import { sql } from '@vercel/postgres';
-
-export async function getProducts(filters: ProductFilter = {}) {
-  const { rows } = await sql`SELECT * FROM products WHERE ...`;
-  return rows;
-}
-```
-
-#### Opción B: Otras alternativas
-
-- **Supabase**: Base de datos Postgres gratuita
-- **PlanetScale**: MySQL serverless
-- **MongoDB Atlas**: NoSQL
+¿No quieres Firebase? Alternativas: Vercel Postgres, Supabase, PlanetScale o MongoDB Atlas (ajustando la capa lib/db-* si cambias de motor).
 
 ### Paso 4: Actualizar Google Apps Script
 
