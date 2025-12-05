@@ -60,7 +60,7 @@ export default function FilterPanel({ onFilterChange }: FilterPanelProps) {
       hasDiscount: false,
     };
     setFilters(emptyFilters);
-    onFilterChange(emptyFilters);
+    onFilterChange({});
   };
 
   const hasActiveFilters = Object.values(filters).some((v) => v !== '' && v !== false);
