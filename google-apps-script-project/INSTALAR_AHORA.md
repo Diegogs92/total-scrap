@@ -46,9 +46,13 @@ Busca esta línea al inicio del código (línea ~20):
 const URL_API = 'http://localhost:3002/api/import';
 ```
 
-**Déjala así para desarrollo local** (ya está correcta).
+**✅ USAR ESTA URL (desarrollo local)** - Ya está correcta, NO la cambies.
 
-Para producción en Vercel, cámbiala a:
+⚠️ **IMPORTANTE**: El sitio en Vercel actualmente tiene protección de autenticación activada.
+Para usar Vercel en producción:
+1. Ve a: https://vercel.com/dgarciasantillan-7059s-projects/scrapper-berco
+2. Settings → Deployment Protection → Cambiar a "Off"
+3. Luego usa esta URL:
 ```javascript
 const URL_API = 'https://scrapper-berco-2ri9s4b22-dgarciasantillan-7059s-projects.vercel.app/api/import';
 ```
