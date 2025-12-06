@@ -5,6 +5,7 @@ import URLManager from '@/components/URLManager';
 import ResultsTable from '@/components/ResultsTable';
 import ScraperControls from '@/components/ScraperControls';
 import ProgressBar from '@/components/ProgressBar';
+import ThemeToggle from '@/components/ThemeToggle';
 import { ProgressTotals } from '@/types';
 
 const emptyTotals: ProgressTotals = { pending: 0, processing: 0, done: 0, error: 0 };
@@ -27,8 +28,11 @@ export default function Dashboard() {
       <div className="flex flex-col gap-3">
         <p className="text-sm uppercase tracking-[0.2em] text-white/60">Scraper</p>
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-          <div>
-            <h1 className="text-3xl font-semibold text-white">Scraper de precios</h1>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-3xl font-semibold text-white">Scraper de precios</h1>
+              <ThemeToggle />
+            </div>
             <p className="text-white/70">
               Ejecuta scraping manual o automatico, gestiona las URLs y exporta resultados.
             </p>

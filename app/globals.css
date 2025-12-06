@@ -15,12 +15,28 @@
   box-sizing: border-box;
 }
 
-body {
+.theme-dark body {
   background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 35%),
     radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.08), transparent 30%),
     var(--surface);
   color: var(--foreground);
   min-height: 100vh;
+}
+
+.theme-light {
+  --surface: #f8fafc;
+  --card: #ffffff;
+  --card-muted: #e2e8f0;
+  --accent: #059669;
+  --accent-strong: #0284c7;
+  --foreground: #0f172a;
+}
+
+.theme-light body {
+  background: radial-gradient(circle at 20% 20%, rgba(2, 132, 199, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(5, 150, 105, 0.08), transparent 30%),
+    var(--surface);
+  color: var(--foreground);
 }
 
 @layer components {
@@ -31,4 +47,60 @@ body {
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition;
   }
+}
+
+/* Light theme overrides for utility-heavy sections */
+.theme-light .card {
+  border-color: #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 20px 35px rgba(15, 23, 42, 0.08);
+}
+
+.theme-light .bg-white\/5 {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+.theme-light .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+.theme-light .bg-white\/20 {
+  background-color: rgba(15, 23, 42, 0.16) !important;
+}
+.theme-light .bg-white\/30 {
+  background-color: rgba(15, 23, 42, 0.24) !important;
+}
+
+.theme-light .text-white {
+  color: #0f172a !important;
+}
+.theme-light .text-white\/70 {
+  color: rgba(15, 23, 42, 0.7) !important;
+}
+.theme-light .text-white\/60 {
+  color: rgba(15, 23, 42, 0.6) !important;
+}
+.theme-light .text-white\/80 {
+  color: rgba(15, 23, 42, 0.8) !important;
+}
+
+.theme-light input,
+.theme-light textarea,
+.theme-light select {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #e2e8f0 !important;
+}
+
+.theme-light table {
+  color: #0f172a;
+}
+
+.theme-light .btn {
+  color: #0f172a;
+}
+.theme-light .btn.bg-emerald-500,
+.theme-light .btn.bg-rose-500,
+.theme-light .btn.bg-rose-500\/80,
+.theme-light .btn.bg-emerald-500\/80 {
+  color: #ffffff !important;
 }
