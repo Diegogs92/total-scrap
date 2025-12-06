@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Loader2, Play, Square, Zap } from 'lucide-react';
+import { Loader2, Play, Square } from 'lucide-react';
 import { ProgressTotals, ScrapeBatchSummary, ScraperConfig } from '@/types';
 
 type Props = {

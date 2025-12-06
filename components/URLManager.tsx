@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
-import { Edit3, Loader2, Trash, Upload, Search, ChevronLeft, ChevronRight, X, Plus, CheckCircle2, XCircle, Clock, AlertCircle } from 'lucide-react';
+import { Edit3, Loader2, Trash, Upload, Search, ChevronLeft, ChevronRight, X, Plus, CheckCircle2, XCircle, Clock } from 'lucide-react';
 import { UrlItem } from '@/types';
 
 type Props = {

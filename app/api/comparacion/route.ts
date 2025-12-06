@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 
+type ProductItem = {
+  id: string;
+  nombre: string;
+  precio: number;
+  descuento: string;
+  proveedor: string;
+  url: string;
+  fechaScraping: string;
+};
+
 export async function GET(request: NextRequest) {
   try {
     const params = request.nextUrl.searchParams;
@@ -15,7 +25,7 @@ export async function GET(request: NextRequest) {
       .get();
 
     // Group by product name
-    const productMap = new Map<string, any[]>();
+    const productMap = new Map<string, ProductItem[]>();
 
     snapshot.docs.forEach((doc) => {
       const data = doc.data();
@@ -40,8 +50,8 @@ export async function GET(request: NextRequest) {
 
     // Filter products with multiple providers and calculate stats
     const comparisons = Array.from(productMap.entries())
-      .filter(([_, items]) => items.length > 1) // Only products with 2+ providers
-      .map(([nombre, items]) => {
+      .filter(([, items]) => items.length > 1) // Only products with 2+ providers
+      .map(([, items]) => {
         const precios = items.map(item => item.precio);
         const minPrecio = Math.min(...precios);
         const maxPrecio = Math.max(...precios);
