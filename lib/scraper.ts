@@ -1,13 +1,12 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { db } from './firebase';
-import { cleanText, delay, isoNow, safeNum } from './utils';
+import { cleanText, isoNow, safeNum } from './utils';
 import { ScrapeBatchSummary, ScrapeResult, UrlItem } from '@/types';
 
-const RATE_LIMIT_MS = 100; // Reducido de 500ms a 100ms
-const MAX_PER_RUN = 1000; // Aumentado de 300 a 1000
-const EXECUTION_LIMIT_MS = 9 * 60 * 1000; // Aumentado a 9 minutos (límite de Vercel: 10min)
-const PARALLEL_BATCH_SIZE = 10; // Procesar 10 URLs en paralelo
+const MAX_PER_RUN = 2000; // Aumentado a 2000 URLs por ejecución
+const EXECUTION_LIMIT_MS = 9 * 60 * 1000; // 9 minutos (límite de Vercel: 10min)
+const PARALLEL_BATCH_SIZE = 50; // Procesar 50 URLs en paralelo (mucho más rápido)
 
 type JsonLdProduct = {
   name?: string;
@@ -260,10 +259,7 @@ export async function runScrapingBatch(
       errors += result.errors;
     });
 
-    // Pequeño delay entre lotes para no saturar los servidores
-    if (i + PARALLEL_BATCH_SIZE < docs.length) {
-      await delay(RATE_LIMIT_MS);
-    }
+    // Sin delay - procesamiento máximo de velocidad
   }
 
   const remainingSnapshot = await db.collection('urls').where('status', '==', 'pending').get();
