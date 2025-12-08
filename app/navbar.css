@@ -1,0 +1,4 @@
+.navbar-shell {
+  background: var(--nav-bg);
+  color: var(--nav-fg);
+}

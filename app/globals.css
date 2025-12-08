@@ -10,6 +10,8 @@
   --accent-strong: #ea580c;
   --error: #ef4444;
   --foreground: #e5e7eb;
+  --nav-bg: #111214;
+  --nav-fg: #e5e7eb;
 
   --spacing-xs: 0.5rem;
   --spacing-sm: 0.75rem;
@@ -52,6 +54,8 @@
   --accent-strong: #0b1220;
   --error: #ef4444;
   --foreground: #0f172a;
+  --nav-bg: #ffffff;
+  --nav-fg: #0f172a;
 
   --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
   --shadow-md: 0 8px 20px -14px rgba(15, 23, 42, 0.25);
