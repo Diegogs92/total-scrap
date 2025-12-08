@@ -51,7 +51,7 @@ export default function PriceAlertsBadge({ onSelect }: Props) {
     <div className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="relative p-2 rounded-lg bg-white/10 text-white hover:bg-white/20"
+        className="relative p-2 rounded-lg bg-black/5 text-[color:var(--foreground)] hover:bg-black/10"
         aria-label="Ver alertas de precio"
       >
         <Bell className="h-5 w-5" />
@@ -63,23 +63,23 @@ export default function PriceAlertsBadge({ onSelect }: Props) {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-96 rounded-xl border border-white/10 bg-black/80 backdrop-blur shadow-xl z-50">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+        <div className="absolute right-0 mt-2 w-96 rounded-xl alert-panel backdrop-blur shadow-xl z-50 border border-black/10">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-black/10">
             <div>
-              <p className="text-sm font-semibold text-white">Cambios de precio</p>
-              <p className="text-xs text-white/50">Últimos movimientos detectados</p>
+              <p className="text-sm font-semibold">Cambios de precio</p>
+              <p className="text-xs text-[color:var(--foreground)]/60">Últimos movimientos detectados</p>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={markAllRead}
-                className="text-xs text-[#16DB93] hover:text-[#16DB93] flex items-center gap-1"
+                className="text-xs text-emerald-500 hover:text-emerald-400 flex items-center gap-1"
               >
                 <Check className="h-3 w-3" />
                 Marcar leídas
               </button>
               <button
                 onClick={loadAlerts}
-                className="p-1 rounded bg-white/5 text-white hover:bg-white/10"
+                className="p-1 rounded bg-black/5 text-[color:var(--foreground)] hover:bg-black/10"
                 disabled={loading}
               >
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <span className="text-xs">Recargar</span>}
@@ -87,11 +87,11 @@ export default function PriceAlertsBadge({ onSelect }: Props) {
             </div>
           </div>
 
-          <div className="max-h-96 overflow-auto divide-y divide-white/5">
+          <div className="max-h-96 overflow-auto divide-y divide-black/5">
             {loading && alerts.length === 0 ? (
-              <div className="py-6 text-center text-white/60 text-sm">Cargando alertas...</div>
+              <div className="py-6 text-center text-[color:var(--foreground)]/70 text-sm">Cargando alertas...</div>
             ) : alerts.length === 0 ? (
-              <div className="py-6 text-center text-white/60 text-sm">Sin cambios de precio aún.</div>
+              <div className="py-6 text-center text-[color:var(--foreground)]/70 text-sm">Sin cambios de precio aún.</div>
             ) : (
               alerts.map((alert) => {
                 const isUp = alert.delta > 0;
@@ -103,13 +103,13 @@ export default function PriceAlertsBadge({ onSelect }: Props) {
                       onSelect?.(alert);
                       setOpen(false);
                   }}
-                  className="w-full text-left px-4 py-3 hover:bg-white/5 transition-colors"
-                >
+                    className="w-full text-left px-4 py-3 hover:bg-black/5 transition-colors"
+                  >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-white line-clamp-1">{alert.nombre}</p>
-                        <p className="text-xs text-white/60 line-clamp-1">{alert.proveedor}</p>
-                        <p className="text-[11px] text-white/50 mt-1">
+                        <p className="text-sm font-semibold text-[color:var(--foreground)] line-clamp-1">{alert.nombre}</p>
+                        <p className="text-xs text-[color:var(--foreground)]/70 line-clamp-1">{alert.proveedor}</p>
+                        <p className="text-[11px] text-[color:var(--foreground)]/60 mt-1">
                           {new Date(alert.fecha).toLocaleString('es-AR')}
                         </p>
                       </div>
