@@ -7,12 +7,11 @@ import ScrapingProgress from '@/components/ScrapingProgress';
 import Navbar from '@/components/Navbar';
 import URLSection from '@/components/sections/URLSection';
 import ResultsSection from '@/components/sections/ResultsSection';
-import StatsSection from '@/components/sections/StatsSection';
 import { ProgressTotals } from '@/types';
 
 const emptyTotals: ProgressTotals = { pending: 0, processing: 0, done: 0, error: 0 };
 
-type NavSection = 'urls' | 'resultados' | 'estadisticas';
+type NavSection = 'urls' | 'resultados';
 
 function DashboardContent() {
   const [totals, setTotals] = useState<ProgressTotals>(emptyTotals);
@@ -37,8 +36,6 @@ function DashboardContent() {
         return <URLSection totals={totals} onRefresh={refreshProgress} />;
       case 'resultados':
         return <ResultsSection onRefresh={refreshProgress} />;
-      case 'estadisticas':
-        return <StatsSection totals={totals} />;
       default:
         return <URLSection totals={totals} onRefresh={refreshProgress} />;
     }

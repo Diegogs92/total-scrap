@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FileDown, Loader2, Search, ChevronLeft, ChevronRight, X, CheckCircle2, XCircle } from 'lucide-react';
+import { FileDown, Loader2, Search, ChevronLeft, ChevronRight, X, CheckCircle2, XCircle, BarChart3 } from 'lucide-react';
 import { ResultFilter, ScrapeResult } from '@/types';
+import ComparisonModal from './ComparisonModal';
 
 type Props = {
   onRefresh?: () => void;
@@ -10,6 +11,8 @@ export default function ResultsTable({ onRefresh }: Props) {
   const [results, setResults] = useState<ScrapeResult[]>([]);
   const [filters, setFilters] = useState<ResultFilter>({});
   const [loading, setLoading] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [showComparison, setShowComparison] = useState(false);
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,6 +61,29 @@ export default function ResultsTable({ onRefresh }: Props) {
   const totalPages = Math.ceil(totalCount / pageSize);
   const canPrevPage = currentPage > 1;
   const canNextPage = currentPage < totalPages;
+
+  // Selection handlers
+  const toggleSelection = (id: string) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === results.length) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(results.map(r => r.id || r.url)));
+    }
+  };
+
+  const selectedProducts = results.filter(r => selectedIds.has(r.id || r.url));
 
   return (
     <div className="card flex h-full flex-col gap-4 p-4">
@@ -118,10 +144,28 @@ export default function ResultsTable({ onRefresh }: Props) {
         </button>
       )}
 
+      {selectedIds.size > 0 && (
+        <button
+          onClick={() => setShowComparison(true)}
+          className="btn bg-gradient-to-r from-emerald-500 to-teal-500 text-white hover:from-emerald-600 hover:to-teal-600 flex items-center gap-2"
+        >
+          <BarChart3 className="h-4 w-4" />
+          Comparar {selectedIds.size} {selectedIds.size === 1 ? 'Producto' : 'Productos'}
+        </button>
+      )}
+
       <div className="flex-1 overflow-auto rounded-lg border border-white/5">
         <table className="w-full text-sm text-white/80">
           <thead className="bg-white/5 text-left text-xs uppercase text-white/60 sticky top-0">
             <tr>
+              <th className="px-4 py-2 w-12">
+                <input
+                  type="checkbox"
+                  checked={results.length > 0 && selectedIds.size === results.length}
+                  onChange={toggleSelectAll}
+                  className="w-4 h-4 rounded border-white/20 bg-white/10 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0 cursor-pointer"
+                />
+              </th>
               <th className="px-4 py-2">Producto</th>
               <th className="px-4 py-2">Precio</th>
               <th className="px-4 py-2">Descuento</th>
@@ -134,23 +178,34 @@ export default function ResultsTable({ onRefresh }: Props) {
           <tbody>
             {loading && results.length === 0 ? (
               <tr>
-                <td className="px-4 py-12 text-center text-white/60" colSpan={7}>
+                <td className="px-4 py-12 text-center text-white/60" colSpan={8}>
                   <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
                   Cargando resultados...
                 </td>
               </tr>
             ) : results.length === 0 ? (
               <tr>
-                <td className="px-4 py-6 text-center text-white/60" colSpan={7}>
+                <td className="px-4 py-6 text-center text-white/60" colSpan={8}>
                   {hasActiveFilters
                     ? 'No se encontraron resultados con esos filtros.'
                     : 'Sin resultados. Ejecuta un scraping para ver datos.'}
                 </td>
               </tr>
             ) : (
-              results.map((r) => (
-                <tr key={r.id || r.url} className="border-t border-white/5 hover:bg-white/5">
-                  <td className="px-4 py-3">
+              results.map((r) => {
+                const rowId = r.id || r.url;
+                const isSelected = selectedIds.has(rowId);
+                return (
+                  <tr key={rowId} className="border-t border-white/5 hover:bg-white/5">
+                    <td className="px-4 py-3">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => toggleSelection(rowId)}
+                        className="w-4 h-4 rounded border-white/20 bg-white/10 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0 cursor-pointer"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
                     <div className="font-medium text-white">{r.nombre || 'Sin nombre'}</div>
                     {r.error && <div className="text-xs text-amber-300 mt-1">{r.error}</div>}
                     <a
@@ -189,7 +244,8 @@ export default function ResultsTable({ onRefresh }: Props) {
                     }) : '-'}
                   </td>
                 </tr>
-              ))
+              );
+            })
             )}
           </tbody>
         </table>
@@ -220,6 +276,14 @@ export default function ResultsTable({ onRefresh }: Props) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Comparison Modal */}
+      {showComparison && (
+        <ComparisonModal
+          products={selectedProducts}
+          onClose={() => setShowComparison(false)}
+        />
       )}
     </div>
   );
