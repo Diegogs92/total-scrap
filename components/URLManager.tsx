@@ -21,9 +21,8 @@ export default function URLManager({ onChange }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('');
 
-  // Bulk operations
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [selectAll, setSelectAll] = useState(false);
+  // Delete confirmation
+  const [deleteConfirm, setDeleteConfirm] = useState<{ id: string; url: string } | null>(null);
 
   // File upload
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -44,8 +43,6 @@ export default function URLManager({ onChange }: Props) {
       const data = await res.json();
       setUrls(data.urls || []);
       setTotalCount(data.total || 0);
-      setSelectedIds(new Set());
-      setSelectAll(false);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Error cargando URLs';
       setMessage(msg);
@@ -104,13 +101,18 @@ export default function URLManager({ onChange }: Props) {
     }
   };
 
-  const deleteUrl = async (id: string) => {
-    if (!confirm('Eliminar URL?')) return;
+  const confirmDelete = (id: string, url: string) => {
+    setDeleteConfirm({ id, url });
+  };
+
+  const deleteUrl = async () => {
+    if (!deleteConfirm) return;
     setLoading(true);
     try {
-      await fetch(`/api/urls/${id}`, { method: 'DELETE' });
+      await fetch(`/api/urls/${deleteConfirm.id}`, { method: 'DELETE' });
       await loadUrls();
       onChange?.();
+      setDeleteConfirm(null);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'No se pudo eliminar';
       setMessage(msg);
@@ -184,49 +186,6 @@ export default function URLManager({ onChange }: Props) {
     }
   };
 
-  // Bulk operations
-  const toggleSelectAll = () => {
-    if (selectAll) {
-      setSelectedIds(new Set());
-    } else {
-      setSelectedIds(new Set(urls.map(u => u.id)));
-    }
-    setSelectAll(!selectAll);
-  };
-
-  const toggleSelect = (id: string) => {
-    const newSelected = new Set(selectedIds);
-    if (newSelected.has(id)) {
-      newSelected.delete(id);
-    } else {
-      newSelected.add(id);
-    }
-    setSelectedIds(newSelected);
-    setSelectAll(newSelected.size === urls.length);
-  };
-
-  const bulkDelete = async () => {
-    if (selectedIds.size === 0) return;
-    if (!confirm(`¿Eliminar ${selectedIds.size} URLs seleccionadas?`)) return;
-
-    setLoading(true);
-    try {
-      await Promise.all(
-        Array.from(selectedIds).map(id =>
-          fetch(`/api/urls/${id}`, { method: 'DELETE' })
-        )
-      );
-      setMessage(`${selectedIds.size} URLs eliminadas`);
-      await loadUrls();
-      onChange?.();
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Error al eliminar URLs';
-      setMessage(msg);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // Pagination helpers
   const totalPages = Math.ceil(totalCount / pageSize);
   const canPrevPage = currentPage > 1;
@@ -242,16 +201,6 @@ export default function URLManager({ onChange }: Props) {
             {totalCount > 0 ? `${totalCount} URLs cargadas` : 'Comienza agregando URLs para scrapear'}
           </p>
         </div>
-        {selectedIds.size > 0 && (
-          <button
-            onClick={bulkDelete}
-            className="btn bg-rose-500/30 text-white hover:bg-rose-500/50"
-            title="Eliminar seleccionadas"
-          >
-            <Trash className="h-4 w-4" />
-            ({selectedIds.size})
-          </button>
-        )}
       </div>
 
       {/* Search and Filters */}
@@ -342,14 +291,6 @@ export default function URLManager({ onChange }: Props) {
         <table className="min-w-full text-sm text-white/80">
           <thead className="bg-white/5 text-left text-xs uppercase text-white/60 sticky top-0">
             <tr>
-              <th className="px-3 py-2 w-10">
-                <input
-                  type="checkbox"
-                  checked={selectAll}
-                  onChange={toggleSelectAll}
-                  className="rounded border-white/20 bg-white/10 text-emerald-500 focus:ring-emerald-500"
-                />
-              </th>
               <th className="px-3 py-2">URL</th>
               <th className="px-3 py-2">Proveedor</th>
               <th className="px-3 py-2">Estado</th>
@@ -359,14 +300,14 @@ export default function URLManager({ onChange }: Props) {
           <tbody>
             {loading && urls.length === 0 ? (
               <tr>
-                <td className="px-3 py-12 text-center text-white/60" colSpan={5}>
+                <td className="px-3 py-12 text-center text-white/60" colSpan={4}>
                   <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
                   Cargando URLs...
                 </td>
               </tr>
             ) : urls.length === 0 ? (
               <tr>
-                <td className="px-3 py-6 text-center text-white/60" colSpan={5}>
+                <td className="px-3 py-6 text-center text-white/60" colSpan={4}>
                   {searchTerm || statusFilter
                     ? 'No se encontraron URLs con esos filtros.'
                     : 'Aún no hay URLs cargadas.'}
@@ -375,14 +316,6 @@ export default function URLManager({ onChange }: Props) {
             ) : (
               urls.map((u) => (
                 <tr key={u.id} className="border-t border-white/5 hover:bg-white/5">
-                  <td className="px-3 py-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.has(u.id)}
-                      onChange={() => toggleSelect(u.id)}
-                      className="rounded border-white/20 bg-white/10 text-emerald-500 focus:ring-emerald-500"
-                    />
-                  </td>
                   <td className="px-3 py-2 align-top">
                     <div className="line-clamp-2 break-all text-white">{u.url}</div>
                     {u.ultimoError && (
@@ -412,7 +345,7 @@ export default function URLManager({ onChange }: Props) {
                       </button>
                       <button
                         className="rounded-lg bg-rose-500/30 p-2 text-white hover:bg-rose-500/50"
-                        onClick={() => deleteUrl(u.id)}
+                        onClick={() => confirmDelete(u.id, u.url)}
                         title="Eliminar"
                       >
                         <Trash className="h-4 w-4" />
@@ -455,7 +388,7 @@ export default function URLManager({ onChange }: Props) {
 
       {/* Edit URL Modal */}
       {editingUrl && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
           <div className="card w-full max-w-2xl p-6 mx-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-white">Editar URL</h3>
@@ -501,6 +434,42 @@ export default function URLManager({ onChange }: Props) {
                   disabled={loading || !editUrlValue.trim()}
                 >
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Guardar'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="card w-full max-w-md p-6 mx-4">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full bg-rose-500/20 flex items-center justify-center mb-4">
+                <Trash className="h-6 w-6 text-rose-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">¿Eliminar URL?</h3>
+              <p className="text-sm text-white/70 mb-4">
+                Esta acción no se puede deshacer.
+              </p>
+              <div className="w-full bg-white/5 rounded-lg p-3 mb-6">
+                <p className="text-xs text-white/60 break-all line-clamp-2">{deleteConfirm.url}</p>
+              </div>
+              <div className="flex gap-3 w-full">
+                <button
+                  onClick={() => setDeleteConfirm(null)}
+                  className="flex-1 btn bg-white/10 text-white hover:bg-white/20"
+                  disabled={loading}
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={deleteUrl}
+                  className="flex-1 btn bg-rose-500 text-white hover:bg-rose-600"
+                  disabled={loading}
+                >
+                  {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Eliminar'}
                 </button>
               </div>
             </div>

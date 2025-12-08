@@ -208,25 +208,43 @@ async function processSingleUrl(doc: FirebaseFirestore.QueryDocumentSnapshot) {
     return { processed: 1, errors: 1 };
   }
 
-  await doc.ref.update({ status: 'processing', ultimoError: null });
-  const result = await scrapeUrl(urlData.url, urlData.proveedor);
+  try {
+    await doc.ref.update({ status: 'processing', ultimoError: null });
+    const result = await scrapeUrl(urlData.url, urlData.proveedor);
 
-  await db.collection('resultados').add({
-    ...result,
-    urlId: doc.id,
-  });
+    await db.collection('resultados').add({
+      ...result,
+      urlId: doc.id,
+    });
 
-  await doc.ref.update({
-    proveedor: result.proveedor,
-    status: result.status === 'success' ? 'done' : 'error',
-    fechaScraping: result.fechaScraping,
-    ultimoError: result.status === 'error' ? result.error || 'Error desconocido' : null,
-  });
+    await doc.ref.update({
+      proveedor: result.proveedor,
+      status: result.status === 'success' ? 'done' : 'error',
+      fechaScraping: result.fechaScraping,
+      ultimoError: result.status === 'error' ? result.error || 'Error desconocido' : null,
+    });
 
-  return {
-    processed: 1,
-    errors: result.status === 'error' ? 1 : 0,
-  };
+    return {
+      processed: 1,
+      errors: result.status === 'error' ? 1 : 0,
+    };
+  } catch (error) {
+    // Si hay cualquier error inesperado (timeout, red, Firebase, etc.), marcar como error
+    const errorMsg = error instanceof Error ? error.message : 'Error inesperado durante el procesamiento';
+    console.error(`Error processing URL ${urlData.url}:`, errorMsg);
+
+    try {
+      await doc.ref.update({
+        status: 'error',
+        ultimoError: errorMsg,
+        fechaScraping: isoNow(),
+      });
+    } catch (updateError) {
+      console.error('Failed to update URL status after error:', updateError);
+    }
+
+    return { processed: 1, errors: 1 };
+  }
 }
 
 export async function runScrapingBatch(
