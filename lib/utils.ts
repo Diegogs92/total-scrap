@@ -21,8 +21,14 @@ export function cleanText(value?: string | null): string {
 export function parseCsvUrls(text: string): string[] {
   return text
     .split(/\r?\n/)
-    .map((line) => cleanText(line.split(',')[0] || ''))
-    .filter(Boolean);
+    .map((line) => {
+      // Remove BOM and trim
+      const cleaned = line.replace(/^\uFEFF/, '').trim();
+      // If it's a CSV with commas, take first column, otherwise take the whole line
+      const url = cleaned.includes(',') ? cleaned.split(',')[0] : cleaned;
+      return cleanText(url);
+    })
+    .filter((url) => url.startsWith('http://') || url.startsWith('https://'));
 }
 
 export function toCsv(rows: Record<string, unknown>[], headers?: string[]): string {
