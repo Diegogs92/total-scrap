@@ -7,6 +7,14 @@ type Props = {
   onRefresh?: () => void;
 };
 
+// Función para formatear precios correctamente en formato argentino
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price);
+};
+
 export default function ResultsTable({ onRefresh }: Props) {
   const [results, setResults] = useState<ScrapeResult[]>([]);
   const [filters, setFilters] = useState<ResultFilter>({});
@@ -218,7 +226,7 @@ export default function ResultsTable({ onRefresh }: Props) {
                     </a>
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
-                    <span className="font-semibold text-white">${r.precio?.toLocaleString('es-AR')}</span>
+                    <span className="font-semibold text-white">${r.precio ? formatPrice(r.precio) : '-'}</span>
                   </td>
                   <td className="px-4 py-3">
                     {r.descuento ? (

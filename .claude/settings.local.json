@@ -24,7 +24,8 @@
       "Bash(npm run build:*)",
       "Bash(git remote set-url:*)",
       "Bash(git fetch:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []

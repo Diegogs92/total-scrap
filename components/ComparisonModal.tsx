@@ -8,6 +8,14 @@ type Props = {
   onClose: () => void;
 };
 
+// Función para formatear precios correctamente en formato argentino
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price);
+};
+
 export default function ComparisonModal({ products, onClose }: Props) {
   if (products.length === 0) return null;
 
@@ -100,7 +108,7 @@ export default function ComparisonModal({ products, onClose }: Props) {
                 <div>
                   <p className="text-xs text-purple-200/60 uppercase tracking-wider">Precio Promedio</p>
                   <p className="text-xl font-bold text-white">
-                    ${Math.round(avgPrice).toLocaleString('es-AR')}
+                    ${formatPrice(avgPrice)}
                   </p>
                 </div>
               </div>
@@ -114,7 +122,7 @@ export default function ComparisonModal({ products, onClose }: Props) {
                 <div>
                   <p className="text-xs text-amber-200/60 uppercase tracking-wider">Ahorro Total</p>
                   <p className="text-xl font-bold text-white">
-                    ${totalSavings.toLocaleString('es-AR')}
+                    ${formatPrice(totalSavings)}
                   </p>
                 </div>
               </div>
@@ -133,13 +141,13 @@ export default function ComparisonModal({ products, onClose }: Props) {
                       <span>{group.items.length} proveedores</span>
                       <span>•</span>
                       <span>
-                        Rango: ${group.minPrecio.toLocaleString('es-AR')} - ${group.maxPrecio.toLocaleString('es-AR')}
+                        Rango: ${formatPrice(group.minPrecio)} - ${formatPrice(group.maxPrecio)}
                       </span>
                       {group.diferencia > 0 && (
                         <>
                           <span>•</span>
                           <span className="text-emerald-400 font-medium">
-                            Ahorra ${group.diferencia.toLocaleString('es-AR')}
+                            Ahorra ${formatPrice(group.diferencia)}
                           </span>
                         </>
                       )}
@@ -185,11 +193,11 @@ export default function ComparisonModal({ products, onClose }: Props) {
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <div className="text-xl font-bold text-white">
-                            ${item.precio.toLocaleString('es-AR')}
+                            ${formatPrice(item.precio)}
                           </div>
                           {itemIdx > 0 && group.hasMultipleProviders && (
                             <div className="text-xs text-rose-400 font-medium">
-                              +${(item.precio - group.minPrecio).toLocaleString('es-AR')} más caro
+                              +${formatPrice(item.precio - group.minPrecio)} más caro
                             </div>
                           )}
                         </div>

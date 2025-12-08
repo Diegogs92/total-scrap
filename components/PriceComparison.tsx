@@ -3,6 +3,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ArrowUpDown, ExternalLink, Loader2, TrendingDown } from 'lucide-react';
 
+// Función para formatear precios correctamente en formato argentino
+const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price);
+};
+
 type ComparisonItem = {
   id: string;
   nombre: string;
@@ -99,8 +107,7 @@ export default function PriceComparison() {
                     <span>{comp.cantidadProveedores} proveedores</span>
                     <span className="text-white/40">•</span>
                     <span>
-                      ${comp.precioMinimo.toLocaleString('es-AR')} - $
-                      {comp.precioMaximo.toLocaleString('es-AR')}
+                      ${formatPrice(comp.precioMinimo)} - ${formatPrice(comp.precioMaximo)}
                     </span>
                   </div>
                 </div>
@@ -111,7 +118,7 @@ export default function PriceComparison() {
                       {comp.diferenciaPorcentaje}%
                     </div>
                     <div className="text-xs text-white/60">
-                      ${comp.diferencia.toLocaleString('es-AR')} menos
+                      ${formatPrice(comp.diferencia)} menos
                     </div>
                   </div>
                   <ArrowUpDown
@@ -151,7 +158,7 @@ export default function PriceComparison() {
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="text-lg font-semibold text-white">
-                            ${item.precio.toLocaleString('es-AR')}
+                            ${formatPrice(item.precio)}
                           </span>
                           <a
                             href={item.url}
