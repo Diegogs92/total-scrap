@@ -15,12 +15,10 @@ export default function Footer() {
         <button
           type="button"
           onClick={() => {
+            const mailto = 'mailto:contacto@dgs.solutions?subject=Comentario%20Total%20Scrap';
+            window.open(mailto, '_blank');
             const target = document.getElementById('comentarios-form');
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
           }}
           className="btn bg-[#FF715B] hover:bg-[#d65d4b] text-white shadow-md shadow-[#FF715B]/30 hover:shadow-lg rounded-full px-5 py-2 text-sm font-semibold"
         >

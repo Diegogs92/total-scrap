@@ -9,44 +9,39 @@ export default function Logo({ className = "h-8 w-8" }: { className?: string }) 
       <defs>
         <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#1EA896" />
-          <stop offset="100%" stopColor="#370031" />
+          <stop offset="100%" stopColor="#0B0033" />
         </linearGradient>
       </defs>
 
-      {/* Background */}
-      <rect width="64" height="64" rx="12" fill="url(#logoGradient)" />
+      <rect width="64" height="64" rx="16" fill="url(#logoGradient)" />
 
-      {/* Database/Data layers */}
-      <ellipse cx="32" cy="20" rx="16" ry="5" fill="white" opacity="0.3" />
-      <ellipse cx="32" cy="24" rx="16" ry="5" fill="white" opacity="0.5" />
-      <ellipse cx="32" cy="28" rx="16" ry="5" fill="white" opacity="0.7" />
+      <circle cx="32" cy="24" r="12" fill="white" opacity="0.12" />
+      <circle cx="32" cy="24" r="9" fill="white" opacity="0.18" />
 
-      {/* Download/Scrape arrow */}
       <path
-        d="M32 30 L32 42 M26 37 L32 43 L38 37"
-        stroke="white"
+        d="M24 30c0 4.418 3.582 8 8 8s8-3.582 8-8"
+        stroke="#FFFFFF"
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        fill="none"
+      />
+      <path
+        d="M32 14v16"
+        stroke="#FFFFFF"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="M27 25l5 5 5-5"
+        stroke="#FFFFFF"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
 
-      {/* Price tag indicator */}
-      <g transform="translate(40, 38)">
-        <path
-          d="M0 0 L6 0 L9 3 L6 6 L0 6 Z"
-          fill="#FF715B"
-          opacity="0.95"
-        />
-        <circle cx="3" cy="3" r="1" fill="white" />
-      </g>
-
-      {/* Data dots (representing scraped prices) */}
-      <circle cx="14" cy="48" r="2" fill="white" opacity="0.8" />
-      <circle cx="22" cy="50" r="2" fill="white" opacity="0.9" />
-      <circle cx="32" cy="52" r="2" fill="white" />
-      <circle cx="42" cy="50" r="2" fill="white" opacity="0.9" />
-      <circle cx="50" cy="48" r="2" fill="white" opacity="0.8" />
+      <circle cx="22" cy="44" r="3" fill="#FF715B" />
+      <circle cx="32" cy="44" r="3" fill="#FF715B" opacity="0.9" />
+      <circle cx="42" cy="44" r="3" fill="#FF715B" opacity="0.8" />
     </svg>
   );
 }
