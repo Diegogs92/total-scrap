@@ -51,15 +51,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0B0033] via-[#370031] to-[#0B0033] p-4">
       <div className="card w-full max-w-md p-8">
         <div className="flex flex-col items-center mb-8">
           <div className="relative mb-6">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#16DB93] to-[#598392] blur-2xl opacity-20 animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1EA896] to-[#FF715B] blur-2xl opacity-20 animate-pulse"></div>
             <Logo className="h-20 w-20 relative" />
           </div>
-          <h1 className="text-3xl font-bold text-white bg-gradient-to-r from-[#16DB93] to-[#598392] bg-clip-text text-transparent">
-            Scraper Berco
+          <h1 className="text-3xl font-bold text-white bg-gradient-to-r from-[#1EA896] to-[#FF715B] bg-clip-text text-transparent">
+            Total Scrap
           </h1>
           <p className="text-white/60 text-sm mt-2">Inicia sesión para continuar</p>
         </div>
@@ -85,7 +85,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50 focus:border-[#16DB93]/50 transition-all duration-200 group-hover:border-white/20"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50 focus:border-[#1EA896]/50 transition-all duration-200 group-hover:border-white/20"
                 placeholder="tu@email.com"
                 disabled={loading}
                 autoComplete="email"
@@ -104,7 +104,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50 focus:border-[#16DB93]/50 transition-all duration-200 group-hover:border-white/20"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50 focus:border-[#1EA896]/50 transition-all duration-200 group-hover:border-white/20"
                 placeholder="••••••••"
                 disabled={loading}
                 autoComplete="current-password"
@@ -115,7 +115,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-[#16DB93] to-[#598392] text-white font-semibold py-3 px-4 rounded-xl hover:from-[#16DB93] hover:to-sky-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#16DB93]/20 hover:shadow-xl hover:shadow-[#16DB93]/30 transform hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full bg-gradient-to-r from-[#1EA896] to-[#FF715B] text-white font-semibold py-3 px-4 rounded-xl hover:from-[#1EA896] hover:to-[#370031] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#1EA896]/20 hover:shadow-xl hover:shadow-[#1EA896]/30 transform hover:scale-[1.02] active:scale-[0.98]"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
@@ -134,7 +134,7 @@ export default function LoginPage() {
         <div className="mt-6 text-center">
           <p className="text-sm text-white/50">
             ¿No tienes cuenta?{' '}
-            <span className="text-[#16DB93] font-medium">Contacta al administrador</span>
+            <span className="text-[#1EA896] font-medium">Contacta al administrador</span>
           </p>
         </div>
       </div>

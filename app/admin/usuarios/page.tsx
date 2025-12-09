@@ -33,8 +33,8 @@ function AdminUsuariosContent() {
 
   const roleColors = {
     desarrollador: 'text-purple-400 bg-purple-500/10 border-purple-500/30',
-    administrador: 'text-[#16DB93] bg-[#16DB93]/10 border-[#16DB93]/30',
-    consultante: 'text-[#598392] bg-[#598392]/10 border-[#598392]/30',
+    administrador: 'text-[#1EA896] bg-[#1EA896]/10 border-[#1EA896]/30',
+    consultante: 'text-[#FF715B] bg-[#FF715B]/10 border-[#FF715B]/30',
   };
 
   const roleIcons = {
@@ -217,7 +217,7 @@ function AdminUsuariosContent() {
           </div>
 
       {success && (
-        <div className="bg-[#16DB93]/10 border border-[#16DB93]/30 text-emerald-200 px-4 py-3 rounded-lg">
+        <div className="bg-[#1EA896]/10 border border-[#1EA896]/30 text-emerald-200 px-4 py-3 rounded-lg">
           {success}
         </div>
       )}
@@ -234,7 +234,7 @@ function AdminUsuariosContent() {
           {currentUser?.rol !== 'consultante' && (
             <button
               onClick={() => setShowRegisterModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#16DB93] hover:bg-[#16DB93] text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#1EA896] hover:bg-[#1EA896] text-white rounded-lg transition-colors"
             >
               <UserPlus className="h-5 w-5" />
               Registrar Usuario
@@ -266,7 +266,7 @@ function AdminUsuariosContent() {
                     <tr key={user.id} className="border-b border-white/5 hover:bg-white/5">
                       <td className="py-3 px-4 text-white">
                         {user.nombre}
-                        {isCurrentUser && <span className="ml-2 text-xs text-[#16DB93]">(Tú)</span>}
+                        {isCurrentUser && <span className="ml-2 text-xs text-[#1EA896]">(Tú)</span>}
                       </td>
                       <td className="py-3 px-4 text-white/80">{user.email}</td>
                       <td className="py-3 px-4">
@@ -284,7 +284,7 @@ function AdminUsuariosContent() {
                             <>
                               <button
                                 onClick={() => openEditModal(user)}
-                                className="p-2 bg-[#598392]/10 text-[#598392] hover:bg-[#598392]/20 rounded-lg transition-colors"
+                                className="p-2 bg-[#FF715B]/10 text-[#FF715B] hover:bg-[#FF715B]/20 rounded-lg transition-colors"
                                 title="Editar usuario"
                               >
                                 <Pencil className="h-4 w-4" />
@@ -325,7 +325,7 @@ function AdminUsuariosContent() {
                   value={registerData.nombre}
                   onChange={(e) => setRegisterData({ ...registerData, nombre: e.target.value })}
                   required
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50"
                   placeholder="Nombre completo"
                   disabled={actionLoading}
                 />
@@ -338,7 +338,7 @@ function AdminUsuariosContent() {
                   value={registerData.email}
                   onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                   required
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50"
                   placeholder="email@ejemplo.com"
                   disabled={actionLoading}
                 />
@@ -352,7 +352,7 @@ function AdminUsuariosContent() {
                   onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                   required
                   minLength={6}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50"
                   placeholder="Mínimo 6 caracteres"
                   disabled={actionLoading}
                 />
@@ -363,7 +363,7 @@ function AdminUsuariosContent() {
                 <select
                   value={registerData.rol}
                   onChange={(e) => setRegisterData({ ...registerData, rol: e.target.value as UserRole })}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50"
                   disabled={actionLoading}
                 >
                   <option value="consultante">Consultante</option>
@@ -388,7 +388,7 @@ function AdminUsuariosContent() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-[#16DB93] hover:bg-[#16DB93] text-white rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2 bg-[#1EA896] hover:bg-[#1EA896] text-white rounded-lg transition-colors flex items-center justify-center gap-2"
                   disabled={actionLoading}
                 >
                   {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Registrar'}
@@ -413,7 +413,7 @@ function AdminUsuariosContent() {
                   value={editData.nombre}
                   onChange={(e) => setEditData({ ...editData, nombre: e.target.value })}
                   required
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#598392]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#FF715B]/50"
                   placeholder="Nombre completo"
                   disabled={actionLoading}
                 />
@@ -426,7 +426,7 @@ function AdminUsuariosContent() {
                   value={editData.email}
                   onChange={(e) => setEditData({ ...editData, email: e.target.value })}
                   required
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#598392]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#FF715B]/50"
                   placeholder="email@ejemplo.com"
                   disabled={actionLoading}
                 />
@@ -441,7 +441,7 @@ function AdminUsuariosContent() {
                   value={editData.password}
                   onChange={(e) => setEditData({ ...editData, password: e.target.value })}
                   minLength={6}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#598392]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#FF715B]/50"
                   placeholder="Mínimo 6 caracteres"
                   disabled={actionLoading}
                 />
@@ -452,7 +452,7 @@ function AdminUsuariosContent() {
                 <select
                   value={editData.rol}
                   onChange={(e) => setEditData({ ...editData, rol: e.target.value as UserRole })}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#598392]/50"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF715B]/50"
                   disabled={actionLoading}
                 >
                   <option value="consultante">Consultante</option>
@@ -478,7 +478,7 @@ function AdminUsuariosContent() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-[#598392] hover:bg-[#598392] text-white rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2 bg-[#FF715B] hover:bg-[#FF715B] text-white rounded-lg transition-colors flex items-center justify-center gap-2"
                   disabled={actionLoading}
                 >
                   {actionLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Guardar Cambios'}

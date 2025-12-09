@@ -35,9 +35,9 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0B0033] via-[#370031] to-[#0B0033]">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 text-[#16DB93] animate-spin mx-auto mb-4" />
+          <Loader2 className="h-12 w-12 text-[#1EA896] animate-spin mx-auto mb-4" />
           <p className="text-white/60">Cargando...</p>
         </div>
       </div>

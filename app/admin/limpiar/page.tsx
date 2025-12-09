@@ -77,7 +77,7 @@ function LimpiarSistemaContent() {
           </div>
 
       {success && (
-        <div className="bg-[#16DB93]/10 border border-[#16DB93]/30 text-emerald-200 px-4 py-3 rounded-lg">
+        <div className="bg-[#1EA896]/10 border border-[#1EA896]/30 text-emerald-200 px-4 py-3 rounded-lg">
           {success}
         </div>
       )}
@@ -88,9 +88,9 @@ function LimpiarSistemaContent() {
         </div>
       )}
 
-      <div className="bg-[#598392]/10 border border-[#598392]/30 rounded-lg p-4">
+      <div className="bg-[#FF715B]/10 border border-[#FF715B]/30 rounded-lg p-4">
         <div className="flex items-start gap-3">
-          <AlertTriangle className="h-5 w-5 text-[#598392] flex-shrink-0 mt-0.5" />
+          <AlertTriangle className="h-5 w-5 text-[#FF715B] flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-amber-200 font-semibold">Advertencia</p>
             <p className="text-amber-200/80 text-sm mt-1">

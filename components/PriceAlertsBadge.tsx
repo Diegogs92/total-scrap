@@ -117,7 +117,7 @@ export default function PriceAlertsBadge({ onSelect }: Props) {
                         {isUp ? (
                           <ArrowUpRight className="h-4 w-4 text-[#DB2B39]" />
                         ) : (
-                          <ArrowDownRight className="h-4 w-4 text-[#16DB93]" />
+                          <ArrowDownRight className="h-4 w-4 text-[#1EA896]" />
                         )}
                         <div className="text-right">
                           <div className="text-sm font-semibold text-white">

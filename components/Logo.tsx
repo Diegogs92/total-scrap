@@ -8,8 +8,8 @@ export default function Logo({ className = "h-8 w-8" }: { className?: string }) 
     >
       <defs>
         <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#16DB93" />
-          <stop offset="100%" stopColor="#598392" />
+          <stop offset="0%" stopColor="#1EA896" />
+          <stop offset="100%" stopColor="#FF715B" />
         </linearGradient>
       </defs>
 

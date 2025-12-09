@@ -108,7 +108,7 @@ export default function ResultsTable({ onRefresh }: Props) {
         {totalCount > 0 && (
           <a
             href="/api/resultados?format=csv"
-            className="btn bg-white/5 text-[#16DB93] hover:bg-white/10 flex items-center gap-2 border border-[#16DB93]/30"
+            className="btn bg-white/5 text-[#1EA896] hover:bg-white/10 flex items-center gap-2 border border-[#1EA896]/30"
           >
             <FileDown className="h-4 w-4" />
             <span>Exportar CSV</span>
@@ -148,7 +148,7 @@ export default function ResultsTable({ onRefresh }: Props) {
       {hasActiveFilters && (
         <button
           onClick={clearFilters}
-          className="text-xs text-[#16DB93] hover:text-[#16DB93] self-start"
+          className="text-xs text-[#1EA896] hover:text-[#1EA896] self-start"
         >
           Limpiar filtros
         </button>
@@ -157,7 +157,7 @@ export default function ResultsTable({ onRefresh }: Props) {
       {selectedIds.size > 0 && (
         <button
           onClick={() => setShowComparison(true)}
-          className="btn bg-gradient-to-r from-[#16DB93] to-teal-500 text-white hover:from-[#16DB93] hover:to-teal-600 flex items-center gap-2"
+          className="btn bg-gradient-to-r from-[#1EA896] to-teal-500 text-white hover:from-[#1EA896] hover:to-teal-600 flex items-center gap-2"
         >
           <BarChart3 className="h-4 w-4" />
           Comparar {selectedIds.size} {selectedIds.size === 1 ? 'Producto' : 'Productos'}
@@ -173,7 +173,7 @@ export default function ResultsTable({ onRefresh }: Props) {
                   type="checkbox"
                   checked={results.length > 0 && selectedIds.size === results.length}
                   onChange={toggleSelectAll}
-                  className="w-4 h-4 rounded border-white/20 bg-white/10 text-[#16DB93] focus:ring-[#16DB93] focus:ring-offset-0 cursor-pointer"
+                  className="w-4 h-4 rounded border-white/20 bg-white/10 text-[#1EA896] focus:ring-[#1EA896] focus:ring-offset-0 cursor-pointer"
                 />
               </th>
               <th className="px-5 py-4">Producto</th>
@@ -208,7 +208,7 @@ export default function ResultsTable({ onRefresh }: Props) {
                       !hasActiveFilters ? (
                         <button
                           onClick={() => {/* Navigate to URLs section */}}
-                          className="btn bg-[#16DB93] text-white hover:bg-[#16DB93] flex items-center gap-2"
+                          className="btn bg-[#1EA896] text-white hover:bg-[#1EA896] flex items-center gap-2"
                         >
                           <Play className="h-4 w-4" />
                           Ir a agregar URLs
@@ -232,17 +232,17 @@ export default function ResultsTable({ onRefresh }: Props) {
                         type="checkbox"
                         checked={isSelected}
                         onChange={() => toggleSelection(rowId)}
-                        className="w-4 h-4 rounded border-white/20 bg-white/10 text-[#16DB93] focus:ring-[#16DB93] focus:ring-offset-0 cursor-pointer"
+                        className="w-4 h-4 rounded border-white/20 bg-white/10 text-[#1EA896] focus:ring-[#1EA896] focus:ring-offset-0 cursor-pointer"
                       />
                     </td>
                     <td className="px-5 py-4">
                       <div className="font-semibold text-white mb-1">{r.nombre || 'Sin nombre'}</div>
-                      {r.error && <div className="text-xs text-[#598392] mb-1">{r.error}</div>}
+                      {r.error && <div className="text-xs text-[#FF715B] mb-1">{r.error}</div>}
                       <a
                         href={r.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-[#16DB93] hover:text-[#16DB93]/80 transition-colors inline-flex items-center gap-1"
+                        className="text-xs text-[#1EA896] hover:text-[#1EA896]/80 transition-colors inline-flex items-center gap-1"
                       >
                         Ver producto
                       </a>
@@ -252,7 +252,7 @@ export default function ResultsTable({ onRefresh }: Props) {
                     </td>
                     <td className="px-5 py-4">
                       {r.descuento ? (
-                        <span className="text-[#16DB93] font-semibold">{r.descuento}</span>
+                        <span className="text-[#1EA896] font-semibold">{r.descuento}</span>
                       ) : (
                         <span className="text-white/30">-</span>
                       )}

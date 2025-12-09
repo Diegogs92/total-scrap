@@ -300,10 +300,10 @@ export default function URLManager({ onChange }: Props) {
       </div>
 
       {/* Add URLs */}
-      <div className="card bg-gradient-to-br from-[#16DB93]/[0.08] to-[#598392]/[0.05] border border-[#16DB93]/20 p-5 flex flex-col gap-4">
+      <div className="card bg-gradient-to-br from-[#1EA896]/[0.08] to-[#FF715B]/[0.05] border border-[#1EA896]/20 p-5 flex flex-col gap-4">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-wider text-[#16DB93] font-semibold mb-1">Agregar URLs</p>
+            <p className="text-xs uppercase tracking-wider text-[#1EA896] font-semibold mb-1">Agregar URLs</p>
             <p className="text-sm text-white/70">Pega una URL o importa varias desde archivo.</p>
           </div>
           <div className="flex items-center gap-2">
@@ -317,7 +317,7 @@ export default function URLManager({ onChange }: Props) {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="btn bg-white/5 text-[#16DB93] hover:bg-white/10 flex items-center gap-2 border border-[#16DB93]/30 text-sm"
+              className="btn bg-white/5 text-[#1EA896] hover:bg-white/10 flex items-center gap-2 border border-[#1EA896]/30 text-sm"
               disabled={loading}
             >
               <Upload className="h-4 w-4" />
@@ -335,7 +335,7 @@ export default function URLManager({ onChange }: Props) {
           />
           <button
             type="submit"
-            className="btn bg-gradient-to-r from-[#16DB93] to-[#598392] text-white shadow-lg shadow-[#16DB93]/25 px-6 flex items-center gap-2 font-semibold"
+            className="btn bg-gradient-to-r from-[#1EA896] to-[#FF715B] text-white shadow-lg shadow-[#1EA896]/25 px-6 flex items-center gap-2 font-semibold"
             disabled={loading}
             title="Agregar URL"
           >
@@ -378,7 +378,7 @@ export default function URLManager({ onChange }: Props) {
                       !searchTerm && !statusFilter ? (
                         <button
                           onClick={() => document.querySelector<HTMLInputElement>('input[placeholder*="Agregar"]')?.focus()}
-                          className="btn bg-[#16DB93] text-white hover:bg-[#16DB93] flex items-center gap-2"
+                          className="btn bg-[#1EA896] text-white hover:bg-[#1EA896] flex items-center gap-2"
                         >
                           <Plus className="h-4 w-4" />
                           Agregar primera URL
@@ -398,7 +398,7 @@ export default function URLManager({ onChange }: Props) {
                         href={u.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="line-clamp-2 break-all text-[#16DB93] hover:text-emerald-200 underline decoration-[#16DB93]/60"
+                        className="line-clamp-2 break-all text-[#1EA896] hover:text-emerald-200 underline decoration-[#1EA896]/60"
                       >
                         {u.url}
                       </a>
@@ -406,7 +406,7 @@ export default function URLManager({ onChange }: Props) {
                       <div className="line-clamp-2 break-all text-white">-</div>
                     )}
                     {u.ultimoError && (
-                      <p className="text-xs text-[#598392]">Error: {u.ultimoError}</p>
+                      <p className="text-xs text-[#FF715B]">Error: {u.ultimoError}</p>
                     )}
                   </td>
                   <td className="px-3 py-2 align-top">{u.proveedor}</td>
@@ -503,7 +503,7 @@ export default function URLManager({ onChange }: Props) {
                   type="text"
                   value={editUrlValue}
                   onChange={(e) => setEditUrlValue(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none focus:border-[#16DB93]"
+                  className="w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none focus:border-[#1EA896]"
                   placeholder="https://ejemplo.com/producto"
                   autoFocus
                   onKeyDown={(e) => {
@@ -525,7 +525,7 @@ export default function URLManager({ onChange }: Props) {
                 </button>
                 <button
                   onClick={saveEditUrl}
-                  className="btn bg-[#16DB93] text-white hover:bg-[#16DB93]"
+                  className="btn bg-[#1EA896] text-white hover:bg-[#1EA896]"
                   disabled={loading || !editUrlValue.trim()}
                 >
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Guardar'}
@@ -553,7 +553,7 @@ export default function URLManager({ onChange }: Props) {
                   href={deleteConfirm.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-white/60 break-all line-clamp-2 underline decoration-[#16DB93]/60"
+                  className="text-xs text-white/60 break-all line-clamp-2 underline decoration-[#1EA896]/60"
                 >
                   {deleteConfirm.url}
                 </a>

@@ -85,8 +85,8 @@ export default function ScraperControls({ onRefresh, totals }: Props) {
           <div className="flex items-center gap-2">
             <p className="text-xs uppercase tracking-[0.2em] text-white/60">Paso 2</p>
             {isPolling && (
-              <span className="flex items-center gap-1 text-xs text-[#16DB93]">
-                <span className="h-2 w-2 rounded-full bg-[#16DB93] animate-pulse"></span>
+              <span className="flex items-center gap-1 text-xs text-[#1EA896]">
+                <span className="h-2 w-2 rounded-full bg-[#1EA896] animate-pulse"></span>
                 Actualizando
               </span>
             )}
@@ -106,7 +106,7 @@ export default function ScraperControls({ onRefresh, totals }: Props) {
           className={`btn ${
             config.scrapingActivo
               ? 'bg-[#DB2B39]/80 text-white hover:bg-[#DB2B39]'
-              : 'bg-[#16DB93] text-white hover:bg-[#16DB93]'
+              : 'bg-[#1EA896] text-white hover:bg-[#1EA896]'
           }`}
           disabled={loading}
         >

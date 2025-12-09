@@ -26,13 +26,13 @@ export default function DashboardCard({
 }: Props) {
   return (
     <div
-      className={`card p-6 flex flex-col gap-4 ${onClick ? 'cursor-pointer hover:border-[#16DB93]/30' : ''}`}
+      className={`card p-6 flex flex-col gap-4 ${onClick ? 'cursor-pointer hover:border-[#1EA896]/30' : ''}`}
       onClick={onClick}
     >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="rounded-xl bg-gradient-to-br from-[#16DB93]/20 to-[#598392]/20 p-3">
-            <Icon className="h-6 w-6 text-[#16DB93]" />
+          <div className="rounded-xl bg-gradient-to-br from-[#1EA896]/20 to-[#FF715B]/20 p-3">
+            <Icon className="h-6 w-6 text-[#1EA896]" />
           </div>
           <div>
             <div className="flex items-center gap-2">

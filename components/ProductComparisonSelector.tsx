@@ -126,7 +126,7 @@ export default function ProductComparisonSelector() {
           <button
             onClick={loadProducts}
             disabled={loading}
-            className="btn bg-[#16DB93] hover:bg-[#16DB93] text-white flex items-center gap-2"
+            className="btn bg-[#1EA896] hover:bg-[#1EA896] text-white flex items-center gap-2"
           >
             {loading ? (
               <>
@@ -150,7 +150,7 @@ export default function ProductComparisonSelector() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar producto o proveedor..."
-            className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#16DB93]/50"
+            className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#1EA896]/50"
           />
           {searchTerm && (
             <button
@@ -167,7 +167,7 @@ export default function ProductComparisonSelector() {
       <div className="grid gap-3">
         {loading && products.length === 0 ? (
           <div className="card p-12 text-center">
-            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-3 text-[#16DB93]" />
+            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-3 text-[#1EA896]" />
             <p className="text-white/60">Cargando productos...</p>
           </div>
         ) : filteredProducts.length === 0 ? (
@@ -184,7 +184,7 @@ export default function ProductComparisonSelector() {
               key={product.normalizedName}
               className={`card cursor-pointer transition-all duration-200 ${
                 selectedProduct?.normalizedName === product.normalizedName
-                  ? 'ring-2 ring-[#16DB93] bg-[#16DB93]/5'
+                  ? 'ring-2 ring-[#1EA896] bg-[#1EA896]/5'
                   : 'hover:bg-white/5'
               }`}
               onClick={() => setSelectedProduct(selectedProduct?.normalizedName === product.normalizedName ? null : product)}
@@ -195,7 +195,7 @@ export default function ProductComparisonSelector() {
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="text-white font-medium">{product.nombre}</h4>
                       {selectedProduct?.normalizedName === product.normalizedName && (
-                        <CheckCircle2 className="h-5 w-5 text-[#16DB93]" />
+                        <CheckCircle2 className="h-5 w-5 text-[#1EA896]" />
                       )}
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/60">
@@ -208,7 +208,7 @@ export default function ProductComparisonSelector() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="flex items-center gap-1 text-[#16DB93] font-semibold">
+                    <div className="flex items-center gap-1 text-[#1EA896] font-semibold">
                       <TrendingDown className="h-4 w-4" />
                       {product.diferenciaPorcentaje.toFixed(1)}%
                     </div>
@@ -226,7 +226,7 @@ export default function ProductComparisonSelector() {
                         key={item.id}
                         className={`flex items-center justify-between p-3 rounded-lg ${
                           idx === 0
-                            ? 'bg-[#16DB93]/10 border border-[#16DB93]/30'
+                            ? 'bg-[#1EA896]/10 border border-[#1EA896]/30'
                             : 'bg-white/5'
                         }`}
                       >
@@ -234,13 +234,13 @@ export default function ProductComparisonSelector() {
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium text-white">{item.proveedor}</span>
                             {idx === 0 && (
-                              <span className="px-2 py-0.5 text-xs bg-[#16DB93]/30 text-emerald-100 rounded-full">
+                              <span className="px-2 py-0.5 text-xs bg-[#1EA896]/30 text-emerald-100 rounded-full">
                                 Mejor precio
                               </span>
                             )}
                           </div>
                           {item.descuento && (
-                            <span className="text-xs text-[#16DB93] mt-1 inline-block">
+                            <span className="text-xs text-[#1EA896] mt-1 inline-block">
                               {item.descuento}
                             </span>
                           )}
@@ -263,7 +263,7 @@ export default function ProductComparisonSelector() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#16DB93] hover:text-[#16DB93] transition-colors"
+                            className="text-[#1EA896] hover:text-[#1EA896] transition-colors"
                             title="Ver producto"
                             onClick={(e) => e.stopPropagation()}
                           >

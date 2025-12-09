@@ -146,7 +146,7 @@ export default function GlobalSearch({ isOpen, onClose }: Props) {
                     className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors text-left"
                   >
                     <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-                      <Icon className="h-4 w-4 text-[#16DB93]" />
+                      <Icon className="h-4 w-4 text-[#1EA896]" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-white truncate">

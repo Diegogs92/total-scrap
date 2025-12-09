@@ -15,8 +15,8 @@ export default function UserSection({ onShowGuide }: Props) {
 
   const roleColors = {
     desarrollador: 'from-purple-500 to-purple-600',
-    administrador: 'from-[#16DB93] to-[#16DB93]',
-    consultante: 'from-[#598392] to-[#598392]',
+    administrador: 'from-[#1EA896] to-[#1EA896]',
+    consultante: 'from-[#FF715B] to-[#FF715B]',
   };
 
   const roleIcons = {
@@ -61,8 +61,8 @@ export default function UserSection({ onShowGuide }: Props) {
           className="card p-6 hover:scale-105 transition-all duration-200 text-left group"
         >
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#598392]/20 to-[#598392]/20 flex items-center justify-center group-hover:from-[#598392]/30 group-hover:to-[#598392]/30 transition-all">
-              <HelpCircle className="h-6 w-6 text-[#598392]" />
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF715B]/20 to-[#FF715B]/20 flex items-center justify-center group-hover:from-[#FF715B]/30 group-hover:to-[#FF715B]/30 transition-all">
+              <HelpCircle className="h-6 w-6 text-[#FF715B]" />
             </div>
             <div>
               <h3 className="text-lg font-semibold text-white mb-1">Guía de Uso</h3>
@@ -80,8 +80,8 @@ export default function UserSection({ onShowGuide }: Props) {
             className="card p-6 hover:scale-105 transition-all duration-200 group"
           >
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#16DB93]/20 to-[#16DB93]/20 flex items-center justify-center group-hover:from-[#16DB93]/30 group-hover:to-[#16DB93]/30 transition-all">
-                <Settings className="h-6 w-6 text-[#16DB93]" />
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1EA896]/20 to-[#1EA896]/20 flex items-center justify-center group-hover:from-[#1EA896]/30 group-hover:to-[#1EA896]/30 transition-all">
+                <Settings className="h-6 w-6 text-[#1EA896]" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white mb-1">Administrar Usuarios</h3>
@@ -100,8 +100,8 @@ export default function UserSection({ onShowGuide }: Props) {
             className="card p-6 hover:scale-105 transition-all duration-200 group"
           >
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#598392]/20 to-amber-600/20 flex items-center justify-center group-hover:from-[#598392]/30 group-hover:to-amber-600/30 transition-all">
-                <Trash2 className="h-6 w-6 text-[#598392]" />
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF715B]/20 to-amber-600/20 flex items-center justify-center group-hover:from-[#FF715B]/30 group-hover:to-amber-600/30 transition-all">
+                <Trash2 className="h-6 w-6 text-[#FF715B]" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white mb-1">Limpiar Sistema</h3>

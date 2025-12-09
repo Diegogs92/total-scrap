@@ -32,10 +32,8 @@ export default function Navbar({ activeSection, onSectionChange }: Props) {
           <div className="flex items-center gap-4">
             <Logo className="h-9 w-9 text-white" />
             <div>
-              <h1 className="text-xl font-bold tracking-tight">Scraper Berco</h1>
-              <p className="text-xs text-white/60 hidden sm:block mt-0.5">
-                Monitoreo de precios
-              </p>
+              <h1 className="text-xl font-bold tracking-tight">Total Scrap</h1>
+              <p className="text-xs text-white/60 hidden sm:block mt-0.5">Monitoreo de precios</p>
             </div>
           </div>
 
@@ -102,7 +100,7 @@ export default function Navbar({ activeSection, onSectionChange }: Props) {
                   }}
                   className={`w-full flex items-center gap-3 px-5 py-3.5 rounded-xl font-semibold transition-all duration-300 ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#16DB93] to-[#598392] text-white shadow-lg shadow-[#16DB93]/25'
+                      ? 'bg-gradient-to-r from-[#1EA896] to-[#FF715B] text-white shadow-lg shadow-[#1EA896]/25'
                       : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >

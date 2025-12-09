@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --surface: #0d0f12;
-  --card: #14171c;
-  --card-muted: #1d2026;
-  --accent: #f97316;
-  --accent-strong: #ea580c;
-  --error: #ef4444;
-  --foreground: #e5e7eb;
-  --nav-bg: #111214;
-  --nav-fg: #e5e7eb;
+  --surface: #0b0033;
+  --card: #170043;
+  --card-muted: #370031;
+  --accent: #ff715b;
+  --accent-strong: #1ea896;
+  --error: #ff715b;
+  --foreground: #ffffff;
+  --nav-bg: #0b0033;
+  --nav-fg: #ffffff;
 
   --spacing-xs: 0.5rem;
   --spacing-sm: 0.75rem;
@@ -36,8 +36,9 @@
 }
 
 .theme-dark body {
-  background: radial-gradient(circle at 15% 20%, rgba(249, 115, 22, 0.06), transparent 30%),
-    linear-gradient(160deg, #0b0d10 0%, #0f1116 50%, #11141a 100%);
+  background: radial-gradient(circle at 18% 20%, rgba(30, 168, 150, 0.12), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(255, 113, 91, 0.14), transparent 30%),
+    linear-gradient(160deg, #0b0033 0%, #0b0033 40%, #370031 100%);
   background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;
@@ -47,15 +48,15 @@
 }
 
 .theme-light {
-  --surface: #f5f7fb;
-  --card: #ffffff;
-  --card-muted: #eef2f7;
-  --accent: #f97316;
-  --accent-strong: #0b1220;
-  --error: #ef4444;
-  --foreground: #0f172a;
+  --surface: #ffffff;
+  --card: #f5f2ff;
+  --card-muted: #efe9ff;
+  --accent: #ff715b;
+  --accent-strong: #1ea896;
+  --error: #ff715b;
+  --foreground: #0b0033;
   --nav-bg: #ffffff;
-  --nav-fg: #0f172a;
+  --nav-fg: #0b0033;
 
   --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
   --shadow-md: 0 8px 20px -14px rgba(15, 23, 42, 0.25);
@@ -64,7 +65,7 @@
 }
 
 .theme-light body {
-  background: linear-gradient(150deg, #f5f7fb 0%, #ffffff 50%, #eef2f7 100%);
+  background: linear-gradient(150deg, #ffffff 0%, #f7f3ff 55%, #efe9ff 100%);
   background-attachment: fixed;
   color: var(--foreground);
 }
@@ -93,7 +94,7 @@
   }
 
   .badge-success {
-    @apply badge bg-[#16DB93]/15 text-[#16DB93] border-2 border-[#16DB93]/40;
+    @apply badge bg-[#1EA896]/15 text-[#1EA896] border-2 border-[#1EA896]/40;
   }
 
   .badge-error {
@@ -101,11 +102,11 @@
   }
 
   .badge-warning {
-    @apply badge bg-[#598392]/15 text-[#598392] border-2 border-[#598392]/40;
+    @apply badge bg-[#FF715B]/15 text-[#FF715B] border-2 border-[#FF715B]/40;
   }
 
   .badge-info {
-    @apply badge bg-[#598392]/15 text-[#598392] border-2 border-[#598392]/40;
+    @apply badge bg-[#FF715B]/15 text-[#FF715B] border-2 border-[#FF715B]/40;
   }
 
   /* Table styles */
@@ -145,104 +146,104 @@
 /* Light theme overrides for utility-heavy sections */
 .theme-light .card {
   background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.08);
-  color: #0f172a;
+  border-color: rgba(11, 0, 51, 0.08);
+  color: #0b0033;
   box-shadow: var(--shadow-md);
 }
 
 .theme-light .card:hover {
-  border-color: rgba(15, 23, 42, 0.12);
+  border-color: rgba(11, 0, 51, 0.14);
   box-shadow: var(--shadow-lg);
 }
 
 .theme-light .bg-white\/5 {
-  background-color: rgba(41, 51, 92, 0.03) !important;
+  background-color: rgba(11, 0, 51, 0.03) !important;
 }
 .theme-light .bg-white\/10 {
-  background-color: rgba(41, 51, 92, 0.06) !important;
+  background-color: rgba(11, 0, 51, 0.06) !important;
 }
 .theme-light .bg-white\/20 {
-  background-color: rgba(41, 51, 92, 0.10) !important;
+  background-color: rgba(11, 0, 51, 0.1) !important;
 }
 .theme-light .bg-white\/30 {
-  background-color: rgba(41, 51, 92, 0.15) !important;
+  background-color: rgba(11, 0, 51, 0.15) !important;
 }
 .theme-light .hover\:bg-white\/5:hover {
-  background-color: rgba(41, 51, 92, 0.05) !important;
+  background-color: rgba(11, 0, 51, 0.05) !important;
 }
 .theme-light .hover\:bg-white\/10:hover {
-  background-color: rgba(41, 51, 92, 0.08) !important;
+  background-color: rgba(11, 0, 51, 0.08) !important;
 }
 .theme-light .hover\:bg-white\/20:hover {
-  background-color: rgba(41, 51, 92, 0.12) !important;
+  background-color: rgba(11, 0, 51, 0.12) !important;
 }
 
 .theme-light .border-white\/10 {
-  border-color: rgba(41, 51, 92, 0.12) !important;
+  border-color: rgba(11, 0, 51, 0.12) !important;
 }
 .theme-light .border-white\/20 {
-  border-color: rgba(41, 51, 92, 0.18) !important;
+  border-color: rgba(11, 0, 51, 0.18) !important;
 }
 
 .theme-light .text-white {
-  color: #1A202C !important;
+  color: #0b0033 !important;
 }
 .theme-light .text-white\/90 {
-  color: rgba(26, 32, 44, 0.9) !important;
+  color: rgba(11, 0, 51, 0.9) !important;
 }
 .theme-light .text-white\/70 {
-  color: rgba(26, 32, 44, 0.7) !important;
+  color: rgba(11, 0, 51, 0.7) !important;
 }
 .theme-light .text-white\/60 {
-  color: rgba(26, 32, 44, 0.6) !important;
+  color: rgba(11, 0, 51, 0.6) !important;
 }
 .theme-light .text-white\/80 {
-  color: rgba(26, 32, 44, 0.8) !important;
+  color: rgba(11, 0, 51, 0.8) !important;
 }
 .theme-light .text-white\/50 {
-  color: rgba(26, 32, 44, 0.5) !important;
+  color: rgba(11, 0, 51, 0.5) !important;
 }
 .theme-light .text-white\/40 {
-  color: rgba(26, 32, 44, 0.4) !important;
+  color: rgba(11, 0, 51, 0.4) !important;
 }
 .theme-light .text-white\/30 {
-  color: rgba(26, 32, 44, 0.3) !important;
+  color: rgba(11, 0, 51, 0.3) !important;
 }
 
 .theme-light input,
 .theme-light textarea,
 .theme-light select {
   background: #ffffff !important;
-  color: #1A202C !important;
-  border-color: rgba(41, 51, 92, 0.15) !important;
+  color: #0b0033 !important;
+  border-color: rgba(11, 0, 51, 0.15) !important;
 }
 
 .theme-light input:focus,
 .theme-light textarea:focus,
 .theme-light select:focus {
-  border-color: #16DB93 !important;
-  box-shadow: 0 0 0 3px rgba(22, 219, 147, 0.1) !important;
+  border-color: #1EA896 !important;
+  box-shadow: 0 0 0 3px rgba(30, 168, 150, 0.15) !important;
 }
 
 .theme-light input::placeholder,
 .theme-light textarea::placeholder {
-  color: rgba(26, 32, 44, 0.4) !important;
+  color: rgba(11, 0, 51, 0.4) !important;
 }
 
 .theme-light table {
-  color: #1A202C;
+  color: #0b0033;
 }
 
 .theme-light .table-container {
-  border-color: rgba(41, 51, 92, 0.15);
+  border-color: rgba(11, 0, 51, 0.15);
   box-shadow: var(--shadow-md);
 }
 
 .theme-light .btn {
-  color: #1A202C;
+  color: #0b0033;
 }
 
-.theme-light .btn.bg-\[#16DB93\] {
+.theme-light .btn.bg-\[#1EA896\] {
   color: #ffffff !important;
 }
 

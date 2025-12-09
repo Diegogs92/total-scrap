@@ -48,18 +48,18 @@ export default function AlertBanner({ onViewAlerts }: Props) {
   return (
     <div
       className={`card mb-6 p-4 border-l-4 ${
-        hasDrops ? 'border-[#16DB93] bg-[#16DB93]/10' : 'border-[#598392] bg-[#598392]/10'
+        hasDrops ? 'border-[#1EA896] bg-[#1EA896]/10' : 'border-[#FF715B] bg-[#FF715B]/10'
       } animate-slide-up`}
     >
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0">
           {hasDrops ? (
-            <div className="w-10 h-10 rounded-full bg-[#16DB93]/20 flex items-center justify-center">
-              <TrendingDown className="h-5 w-5 text-[#16DB93]" />
+            <div className="w-10 h-10 rounded-full bg-[#1EA896]/20 flex items-center justify-center">
+              <TrendingDown className="h-5 w-5 text-[#1EA896]" />
             </div>
           ) : (
-            <div className="w-10 h-10 rounded-full bg-[#598392]/20 flex items-center justify-center">
-              <TrendingUp className="h-5 w-5 text-[#598392]" />
+            <div className="w-10 h-10 rounded-full bg-[#FF715B]/20 flex items-center justify-center">
+              <TrendingUp className="h-5 w-5 text-[#FF715B]" />
             </div>
           )}
         </div>
@@ -78,7 +78,7 @@ export default function AlertBanner({ onViewAlerts }: Props) {
                     <span className="font-medium">{alert.nombreProducto}</span> -{' '}
                     <span
                       className={
-                        alert.porcentajeCambio < 0 ? 'text-[#16DB93]' : 'text-[#DB2B39]'
+                        alert.porcentajeCambio < 0 ? 'text-[#1EA896]' : 'text-[#DB2B39]'
                       }
                     >
                       {alert.porcentajeCambio > 0 ? '+' : ''}

@@ -13,8 +13,8 @@ export default function UserMenu() {
 
   const roleColors = {
     desarrollador: 'text-purple-400',
-    administrador: 'text-[#16DB93]',
-    consultante: 'text-[#598392]',
+    administrador: 'text-[#1EA896]',
+    consultante: 'text-[#FF715B]',
   };
 
   const roleIcons = {
@@ -41,8 +41,8 @@ export default function UserMenu() {
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 mt-2 w-64 bg-slate-800 border border-white/20 rounded-2xl shadow-2xl z-50 overflow-hidden">
-            <div className="p-4 bg-gradient-to-br from-[#16DB93]/20 to-[#598392]/20 border-b border-white/10">
+        <div className="absolute right-0 mt-2 w-64 bg-[#0B0033] border border-white/20 rounded-2xl shadow-2xl z-50 overflow-hidden">
+          <div className="p-4 bg-gradient-to-br from-[#1EA896]/20 to-[#FF715B]/20 border-b border-white/10">
               <p className="text-sm font-semibold text-white">{user.nombre}</p>
               <p className="text-xs text-white/80 mt-0.5">{user.email}</p>
               <div className={`inline-flex items-center gap-1.5 mt-2 px-2 py-1 rounded-full text-xs font-medium ${roleColors[user.rol]} bg-white/20`}>
@@ -51,14 +51,14 @@ export default function UserMenu() {
               </div>
             </div>
 
-            <div className="py-1 bg-slate-800">
+          <div className="py-1 bg-[#0B0033]">
               {hasPermission('administrador') && (
                 <Link
                   href="/admin/usuarios"
-                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-white hover:bg-[#16DB93]/20 transition-all duration-200"
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-white hover:bg-[#1EA896]/20 transition-all duration-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Settings className="h-4 w-4 text-[#16DB93]" />
+                  <Settings className="h-4 w-4 text-[#1EA896]" />
                   <span>Administrar usuarios</span>
                 </Link>
               )}
@@ -66,10 +66,10 @@ export default function UserMenu() {
               {user.rol === 'desarrollador' && (
                 <Link
                   href="/admin/limpiar"
-                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-white hover:bg-[#598392]/20 transition-all duration-200"
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm text-white hover:bg-[#FF715B]/20 transition-all duration-200"
                   onClick={() => setIsOpen(false)}
                 >
-                  <Trash2 className="h-4 w-4 text-[#598392]" />
+                  <Trash2 className="h-4 w-4 text-[#FF715B]" />
                   <span>Limpiar sistema</span>
                 </Link>
               )}
