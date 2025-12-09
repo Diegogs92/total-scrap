@@ -1,4 +1,4 @@
-'use client';
+ï»¿'use client';
 
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -30,17 +30,15 @@ export default function Footer() {
         </div>
         <button
           type="button"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
+          onClick={() => setIsModalOpen(true)}
           className="btn bg-[#FF715B] hover:bg-[#d65d4b] text-white shadow-md shadow-[#FF715B]/30 hover:shadow-lg rounded-full px-5 py-2 text-sm font-semibold"
         >
-          Dejá tu comentario
+          Deja tu comentario
         </button>
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+        <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className="card relative w-full max-w-md bg-[var(--card)] p-6 border border-white/15 shadow-2xl">
             <button
               type="button"
@@ -48,19 +46,13 @@ export default function Footer() {
               className="absolute right-3 top-3 text-white/70 hover:text-white"
               aria-label="Cerrar"
             >
-              ×
+              Ã—
             </button>
-            <h3 className="text-xl font-semibold text-white mb-2">Déjanos tu comentario</h3>
+            <h3 className="text-xl font-semibold text-white mb-2">Dejanos tu comentario</h3>
             <p className="text-sm text-white/70 mb-4">
-              Cuéntanos tu opinión o sugerencia. Te responderemos a la brevedad.
+              Contanos tu opinion o sugerencia. Te responderemos a la brevedad.
             </p>
             <div className="space-y-3">
-              <div className="block text-sm text-white/80">
-                Correo de contacto
-                <p className="mt-1 rounded-lg border border-white/15 bg-black/20 px-3 py-2 text-sm text-white/80">
-                  {user?.email || 'Sin email disponible'}
-                </p>
-              </div>
               <label className="block text-sm text-white/80">
                 Comentario
                 <textarea
@@ -68,7 +60,7 @@ export default function Footer() {
                   onChange={(e) => setMessage(e.target.value)}
                   className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white placeholder-white/40 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none"
                   rows={4}
-                  placeholder="Escribe tu mensaje aquí..."
+                  placeholder="Escribe tu mensaje aqui..."
                 />
               </label>
             </div>
