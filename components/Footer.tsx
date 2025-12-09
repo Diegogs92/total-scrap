@@ -70,38 +70,44 @@ export default function Footer() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-          <div className="card relative w-full max-w-md bg-[var(--card)] p-6 border border-white/15 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
+          <div className="card relative w-full max-w-md bg-gradient-to-br from-[#0B0033] via-[#370031] to-[#0B0033] p-6 border border-white/20 shadow-2xl rounded-xl">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="absolute right-3 top-3 text-white/70 hover:text-white"
+              className="absolute right-4 top-4 text-white/50 hover:text-white hover:bg-white/10 rounded-lg w-8 h-8 flex items-center justify-center transition-all"
               aria-label="Cerrar"
             >
-              ×
+              <span className="text-2xl leading-none">×</span>
             </button>
-            <h3 className="text-xl font-semibold text-white mb-2">Dejanos tu comentario</h3>
-            <p className="text-sm text-white/70 mb-4">
+            <h3 className="text-2xl font-bold text-white mb-2 pr-8">Dejanos tu comentario</h3>
+            <p className="text-sm text-white/60 mb-5">
               Contanos tu opinion o sugerencia. Te responderemos a la brevedad.
             </p>
-            <form className="space-y-3" onSubmit={handleSubmit}>
-              <label className="block text-sm text-white/80">
-                Comentario
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <label className="block">
+                <span className="text-sm font-medium text-white/80 mb-2 block">Comentario</span>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white placeholder-white/40 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none"
-                  rows={4}
+                  className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#1EA896] focus:ring-2 focus:ring-[#1EA896]/30 outline-none transition-all"
+                  rows={5}
                   placeholder="Escribe tu mensaje aqui..."
                   required
                 />
               </label>
               {resultText && (
-                <p className={`text-sm ${status === 'error' ? 'text-[#FF715B]' : 'text-white/70'}`}>
+                <div className={`text-sm font-medium text-center py-2 px-3 rounded-lg ${
+                  status === 'error'
+                    ? 'text-[#FF715B] bg-[#FF715B]/10 border border-[#FF715B]/20'
+                    : status === 'success'
+                    ? 'text-[#1EA896] bg-[#1EA896]/10 border border-[#1EA896]/20'
+                    : 'text-white/70 bg-white/5 border border-white/10'
+                }`}>
                   {resultText}
-                </p>
+                </div>
               )}
-              <div className="mt-2 flex items-center justify-end gap-2">
+              <div className="flex items-center justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -110,14 +116,14 @@ export default function Footer() {
                     setStatus('idle');
                     setResultText('');
                   }}
-                  className="btn bg-white/10 text-white hover:bg-white/20"
+                  className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg transition-all"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={!message.trim() || status === 'sending'}
-                  className="btn bg-[#1EA896] hover:bg-[#147a6a] text-white shadow-md shadow-[#1EA896]/25 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="px-5 py-2.5 bg-[#1EA896] hover:bg-[#147a6a] text-white font-semibold rounded-lg shadow-lg shadow-[#1EA896]/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
                   {status === 'sending' ? 'Enviando...' : 'Enviar'}
                 </button>
