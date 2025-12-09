@@ -86,12 +86,12 @@ function extractBreadcrumbs($: cheerio.CheerioAPI): string {
   return '';
 }
 
-function extractPrice($: cheerio.CheerioAPI): number | null {
+function extractPrice($: cheerio.CheerioAPI, proveedor: string): number | null {
+  // Meta tags (prioritarios)
   const metaSelectors = [
     'meta[property="product:price:amount"]',
     'meta[itemprop="price"]',
     'meta[name="twitter:data1"]',
-    'meta[name="twitter:label1"]',
     'meta[property="og:price:amount"]',
   ];
 
@@ -101,13 +101,42 @@ function extractPrice($: cheerio.CheerioAPI): number | null {
     if (parsed !== null) return parsed;
   }
 
-  // HTML fragments
-  const priceSelectors = ['[data-price]', '.price', '.product-price', '[itemprop="price"]'];
-  for (const selector of priceSelectors) {
-    const val = $(selector).first().attr('data-price') || $(selector).first().text();
-    const parsed = safeNum(val);
-    if (parsed !== null) return parsed;
+  // Selectores específicos para Tienda Nube
+  if (proveedor.toLowerCase().includes('tienda nube') || proveedor.toLowerCase().includes('tiendaemi')) {
+    const tiendaNubeSelectors = [
+      '.js-price-display',
+      '[data-product-price]',
+      '.price-container .js-price-display',
+      '#price_display',
+      '.product-price',
+      '[itemprop="price"]',
+    ];
+
+    for (const selector of tiendaNubeSelectors) {
+      const elem = $(selector).first();
+      const val = elem.attr('data-product-price') || elem.attr('content') || elem.text();
+      const parsed = safeNum(val);
+      if (parsed !== null && parsed > 0) return parsed;
+    }
   }
+
+  // HTML fragments (genéricos)
+  const priceSelectors = [
+    '[data-price]',
+    '.price',
+    '.product-price',
+    '[itemprop="price"]',
+    '.js-price-display',
+    '#price',
+  ];
+
+  for (const selector of priceSelectors) {
+    const elem = $(selector).first();
+    const val = elem.attr('data-price') || elem.attr('content') || elem.text();
+    const parsed = safeNum(val);
+    if (parsed !== null && parsed > 0) return parsed;
+  }
+
   return null;
 }
 
@@ -143,6 +172,8 @@ function extractDiscount(
 
 export async function scrapeUrl(url: string, proveedor?: string): Promise<ScrapeResult> {
   const detectedProvider = proveedor || detectProveedor(url);
+  console.log(`[SCRAPER] Scraping URL: ${url} | Provider: ${detectedProvider}`);
+
   try {
     const { data: html } = await axios.get<string>(url, {
       timeout: 20000,
@@ -154,19 +185,24 @@ export async function scrapeUrl(url: string, proveedor?: string): Promise<Scrape
 
     const $ = cheerio.load(html);
     const jsonLd = parseJSONLD(html);
+
+    // Extraer nombre del producto con selectores mejorados
     const name =
       cleanText(jsonLd?.name) ||
       cleanText($('meta[property="og:title"]').attr('content')) ||
-      cleanText($('h1').first().text());
+      cleanText($('h1[itemprop="name"]').first().text()) ||
+      cleanText($('h1.product-name').first().text()) ||
+      cleanText($('h1').first().text()) ||
+      cleanText($('.product-title').first().text());
 
     const listPrice =
       safeNum(jsonLd?.offers?.priceSpecification?.price) ||
       safeNum(jsonLd?.offers?.price) ||
-      safeNum($('.list-price, .old-price').first().text());
+      safeNum($('.list-price, .old-price, .price-compare, .js-compare-price-display').first().text());
 
     const price =
       safeNum(jsonLd?.offers?.price) ||
-      extractPrice($) ||
+      extractPrice($, detectedProvider) ||
       safeNum($('.best-price, .sale-price').first().text()) ||
       listPrice ||
       null;
@@ -174,6 +210,15 @@ export async function scrapeUrl(url: string, proveedor?: string): Promise<Scrape
     const categoria =
       cleanText(jsonLd?.category) || cleanText(jsonLd?.breadcrumbs) || extractBreadcrumbs($);
     const descuento = extractDiscount($, detectedProvider, price, listPrice);
+
+    console.log(`[SCRAPER] Extracted data:`, {
+      provider: detectedProvider,
+      name: name || 'N/A',
+      price: price ?? 'N/A',
+      listPrice: listPrice ?? 'N/A',
+      discount: descuento || 'N/A',
+      category: categoria || 'N/A',
+    });
 
     return {
       url,
@@ -187,6 +232,8 @@ export async function scrapeUrl(url: string, proveedor?: string): Promise<Scrape
     };
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Error desconocido';
+    console.error(`[SCRAPER] Error scraping ${url}:`, message);
+
     return {
       url,
       nombre: '',
