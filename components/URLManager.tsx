@@ -244,10 +244,9 @@ export default function URLManager({ onChange }: Props) {
     <div className="card flex h-full flex-col gap-6 p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-wider text-white/50 font-semibold mb-2">Paso 1</p>
           <h3 className="text-xl font-bold text-white mb-1">Agrega URLs</h3>
           <p className="text-sm text-white/60">
-            {totalCount > 0 ? `${totalCount} URLs cargadas` : 'Comienza agregando URLs para scrapear'}
+            {totalCount > 0 ? `${totalCount} URLs cargadas` : 'Agrega URLs para scrapear'}
           </p>
         </div>
       </div>
@@ -300,7 +299,7 @@ export default function URLManager({ onChange }: Props) {
       </div>
 
       {/* Add URLs */}
-      <div className="card bg-gradient-to-br from-[#1EA896]/[0.08] to-[#FF715B]/[0.05] border border-[#1EA896]/20 p-5 flex flex-col gap-4">
+      <div className="card bg-white/[0.02] border border-[#1EA896]/20 p-5 flex flex-col gap-4">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-wider text-[#1EA896] font-semibold mb-1">Agregar URLs</p>
@@ -371,7 +370,7 @@ export default function URLManager({ onChange }: Props) {
                     title={searchTerm || statusFilter ? 'No se encontraron URLs' : 'Aún no tienes URLs monitoreadas'}
                     description={
                       searchTerm || statusFilter
-                        ? 'Intenta ajustar los filtros para ver más resultados'
+                        ? 'Ajusta los filtros para ver más resultados'
                         : 'Agrega tu primera URL de producto para comenzar a rastrear precios'
                     }
                     action={
@@ -385,7 +384,6 @@ export default function URLManager({ onChange }: Props) {
                         </button>
                       ) : undefined
                     }
-                    helpText="Puedes agregar URLs de MercadoLibre, Amazon y otros proveedores"
                   />
                 </td>
               </tr>

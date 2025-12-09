@@ -36,9 +36,7 @@
 }
 
 .theme-dark body {
-  background: radial-gradient(circle at 18% 20%, rgba(30, 168, 150, 0.12), transparent 32%),
-    radial-gradient(circle at 82% 12%, rgba(255, 113, 91, 0.14), transparent 30%),
-    linear-gradient(160deg, #0b0033 0%, #0b0033 40%, #370031 100%);
+  background: #0b0033;
   background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;

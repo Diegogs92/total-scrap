@@ -83,7 +83,6 @@ export default function ScraperControls({ onRefresh, totals }: Props) {
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <p className="text-xs uppercase tracking-[0.2em] text-white/60">Paso 2</p>
             {isPolling && (
               <span className="flex items-center gap-1 text-xs text-[#1EA896]">
                 <span className="h-2 w-2 rounded-full bg-[#1EA896] animate-pulse"></span>

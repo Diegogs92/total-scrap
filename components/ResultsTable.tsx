@@ -99,7 +99,6 @@ export default function ResultsTable({ onRefresh }: Props) {
     <div className="card flex h-full flex-col gap-6 p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-wider text-white/50 font-semibold mb-2">Paso 3</p>
           <h3 className="text-xl font-bold text-white mb-1">Revisa los resultados</h3>
           <p className="text-sm text-white/60">
             {totalCount > 0 ? `${totalCount} productos scrapeados` : 'Los resultados aparecerán aquí'}
@@ -202,7 +201,7 @@ export default function ResultsTable({ onRefresh }: Props) {
                     title={hasActiveFilters ? 'No se encontraron resultados' : 'No hay resultados aún'}
                     description={
                       hasActiveFilters
-                        ? 'Intenta ajustar o limpiar los filtros para ver más resultados'
+                        ? 'Ajusta o limpia los filtros para ver más resultados'
                         : 'Agrega URLs y ejecuta el scraper para ver productos y precios'
                     }
                     action={
