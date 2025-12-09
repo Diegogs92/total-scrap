@@ -1,9 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Footer() {
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSend = () => {
+    const email = user?.email || 'sin-email';
+    const body = encodeURIComponent(`Usuario: ${email}\n\nComentario:\n${message || '(sin mensaje)'}`);
+    const mailto = `mailto:contacto@dgs.solutions?subject=Comentario%20Total%20Scrap&body=${body}`;
+    window.open(mailto, '_blank');
+    setIsModalOpen(false);
+    setMessage('');
+  };
 
   return (
     <footer
@@ -23,7 +35,7 @@ export default function Footer() {
           }}
           className="btn bg-[#FF715B] hover:bg-[#d65d4b] text-white shadow-md shadow-[#FF715B]/30 hover:shadow-lg rounded-full px-5 py-2 text-sm font-semibold"
         >
-          DejÃ¡ tu comentario
+          Dejá tu comentario
         </button>
       </div>
 
@@ -36,27 +48,27 @@ export default function Footer() {
               className="absolute right-3 top-3 text-white/70 hover:text-white"
               aria-label="Cerrar"
             >
-              Ã—
+              ×
             </button>
-            <h3 className="text-xl font-semibold text-white mb-2">DÃ©janos tu comentario</h3>
+            <h3 className="text-xl font-semibold text-white mb-2">Déjanos tu comentario</h3>
             <p className="text-sm text-white/70 mb-4">
-              CuÃ©ntanos tu opiniÃ³n o sugerencia. Te responderemos a la brevedad.
+              Cuéntanos tu opinión o sugerencia. Te responderemos a la brevedad.
             </p>
             <div className="space-y-3">
-              <label className="block text-sm text-white/80">
+              <div className="block text-sm text-white/80">
                 Correo de contacto
-                <input
-                  className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white placeholder-white/40 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none"
-                  placeholder="tu@email.com"
-                  type="email"
-                />
-              </label>
+                <p className="mt-1 rounded-lg border border-white/15 bg-black/20 px-3 py-2 text-sm text-white/80">
+                  {user?.email || 'Sin email disponible'}
+                </p>
+              </div>
               <label className="block text-sm text-white/80">
                 Comentario
                 <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="mt-1 w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-white placeholder-white/40 focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 outline-none"
                   rows={4}
-                  placeholder="Escribe tu mensaje aquÃ­..."
+                  placeholder="Escribe tu mensaje aquí..."
                 />
               </label>
             </div>
@@ -68,12 +80,14 @@ export default function Footer() {
               >
                 Cancelar
               </button>
-              <a
-                href="mailto:contacto@dgs.solutions?subject=Comentario%20Total%20Scrap"
-                className="btn bg-[#1EA896] hover:bg-[#147a6a] text-white shadow-md shadow-[#1EA896]/25"
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={!message.trim()}
+                className="btn bg-[#1EA896] hover:bg-[#147a6a] text-white shadow-md shadow-[#1EA896]/25 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 Enviar
-              </a>
+              </button>
             </div>
           </div>
         </div>
